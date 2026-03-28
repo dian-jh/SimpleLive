@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/" />
+  <Folder Name="/src/">
+    <Project Path="SimpleLive.AppHost/SimpleLive.AppHost.csproj" />
+    <Project Path="SimpleLive.ServiceDefaults/SimpleLive.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+</Solution>

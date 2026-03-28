@@ -176,6 +176,8 @@
 
 ![](Images/PRD/yx4.png)
 
+![](Images/PRD/yx7.png)
+
 ![](Images/PRD/yx5.png)
 
 ![](Images/PRD/yx6.png)
@@ -195,6 +197,10 @@
 #### 页面功能
 
 观众进入直播间观看直播并参与互动
+
+#### 原型设计图
+
+![](Images/PRD/yx8.png)
 
 #### 页面内容
 
@@ -245,6 +251,12 @@
 #### 功能说明
 
 主播进行开播配置、查看推流信息、管理本场设置
+
+#### 原型设计图
+
+![](Images/PRD/yx10.png)
+
+![](Images/PRD/yx9.png)
 
 #### 页面模块
 
