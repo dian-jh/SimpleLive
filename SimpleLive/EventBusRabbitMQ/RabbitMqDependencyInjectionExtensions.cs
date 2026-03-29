@@ -1,4 +1,4 @@
-﻿using EventBusRabbitMQ;
+﻿using ZD.EventBusRabbitMQ;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.Hosting;

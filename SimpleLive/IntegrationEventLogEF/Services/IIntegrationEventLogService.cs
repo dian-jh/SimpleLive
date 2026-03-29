@@ -1,4 +1,4 @@
-﻿namespace eShop.IntegrationEventLogEF.Services;
+﻿namespace ZD.IntegrationEventLogEF.Services;
 
 public interface IIntegrationEventLogService
 {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace DomainCommons.Models;
+namespace ZD.DomainCommons.Models;
 
 public abstract class Entity
 {

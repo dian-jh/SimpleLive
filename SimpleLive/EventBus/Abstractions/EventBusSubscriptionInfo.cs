@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
-namespace EventBus.Abstractions;
+namespace ZD.EventBus.Abstractions;
 /// <summary>
 /// 在内存中管理事件名称与事件类型的映射关系，并为事件提供统一的JSON序列化规则
 /// </summary>

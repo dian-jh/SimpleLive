@@ -1,4 +1,4 @@
-﻿namespace EventBusRabbitMQ;
+﻿namespace ZD.EventBusRabbitMQ;
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;

@@ -1,0 +1,6 @@
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\EventBusRabbitMQ\obj\Debug\net10.0\EventBusRabbitMQ.csproj.AssemblyReference.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\EventBusRabbitMQ\obj\Debug\net10.0\EventBusRabbitMQ.GeneratedMSBuildEditorConfig.editorconfig
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\EventBusRabbitMQ\obj\Debug\net10.0\EventBusRabbitMQ.AssemblyInfoInputs.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\EventBusRabbitMQ\obj\Debug\net10.0\EventBusRabbitMQ.AssemblyInfo.cs
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\EventBusRabbitMQ\obj\Debug\net10.0\EventBusRabbitMQ.csproj.CoreCompileInputs.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\EventBusRabbitMQ\obj\Debug\net10.0\EventBusRabbitMQ.sourcelink.json

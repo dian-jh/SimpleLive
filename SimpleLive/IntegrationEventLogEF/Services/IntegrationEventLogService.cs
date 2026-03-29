@@ -1,4 +1,6 @@
-﻿namespace eShop.IntegrationEventLogEF.Services;
+﻿using ZD.IntegrationEventLogEF;
+
+namespace ZD.IntegrationEventLogEF.Services;
 
 public class IntegrationEventLogService<TContext> : IIntegrationEventLogService, IDisposable
     where TContext : DbContext

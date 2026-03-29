@@ -1,4 +1,4 @@
-﻿namespace EventBus.Abstractions;
+﻿namespace ZD.EventBus.Abstractions;
 
 public interface IEventBus
 {

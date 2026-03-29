@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IntegrationEventLogEF;
+namespace ZD.IntegrationEventLogEF;
 
 public class IntegrationEventLogEntry
 {

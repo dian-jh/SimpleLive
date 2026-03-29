@@ -1,4 +1,4 @@
-﻿namespace EventBus.Events;
+﻿namespace ZD.EventBus.Events;
 
 public record IntegrationEvent
 {

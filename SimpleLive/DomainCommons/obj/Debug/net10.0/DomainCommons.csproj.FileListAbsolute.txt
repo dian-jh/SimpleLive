@@ -1,0 +1,6 @@
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\DomainCommons\obj\Debug\net10.0\DomainCommons.csproj.AssemblyReference.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\DomainCommons\obj\Debug\net10.0\DomainCommons.GeneratedMSBuildEditorConfig.editorconfig
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\DomainCommons\obj\Debug\net10.0\DomainCommons.AssemblyInfoInputs.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\DomainCommons\obj\Debug\net10.0\DomainCommons.AssemblyInfo.cs
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\DomainCommons\obj\Debug\net10.0\DomainCommons.csproj.CoreCompileInputs.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\DomainCommons\obj\Debug\net10.0\DomainCommons.sourcelink.json

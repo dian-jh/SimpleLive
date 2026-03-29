@@ -1,4 +1,4 @@
-﻿namespace EventBusRabbitMQ;
+﻿namespace ZD.EventBusRabbitMQ;
 
 public class EventBusOptions
 {

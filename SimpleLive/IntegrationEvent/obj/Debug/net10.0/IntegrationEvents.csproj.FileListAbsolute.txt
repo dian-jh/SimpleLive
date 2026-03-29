@@ -1,0 +1,6 @@
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\IntegrationEvent\obj\Debug\net10.0\IntegrationEvents.csproj.AssemblyReference.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\IntegrationEvent\obj\Debug\net10.0\IntegrationEvents.GeneratedMSBuildEditorConfig.editorconfig
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\IntegrationEvent\obj\Debug\net10.0\IntegrationEvents.AssemblyInfoInputs.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\IntegrationEvent\obj\Debug\net10.0\IntegrationEvents.AssemblyInfo.cs
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\IntegrationEvent\obj\Debug\net10.0\IntegrationEvents.csproj.CoreCompileInputs.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\IntegrationEvent\obj\Debug\net10.0\IntegrationEvents.sourcelink.json

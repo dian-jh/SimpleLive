@@ -1,4 +1,4 @@
-﻿namespace EventBus.Extensions;
+﻿namespace ZD.EventBus.Extensions;
 /// <summary>
 /// 将编译器内部名称转换成人类能读懂的格式。例如：List1`->List<int>
 /// </summary>

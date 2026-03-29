@@ -9,6 +9,8 @@
     <Project Path="DomainCommons/DomainCommons.csproj" Id="4bba507d-17c0-4a83-b25a-c9c8acfd0ccf" />
     <Project Path="EventBus/EventBus.csproj" Id="5c7bbf54-398b-40bd-879c-87dc71fbc2f6" />
     <Project Path="EventBusRabbitMQ/EventBusRabbitMQ.csproj" Id="cca479e1-2939-4500-8842-87d5eecb4e2b" />
+    <Project Path="IntegrationEvent/IntegrationEvents.csproj" Id="971159e3-3088-4eb8-83bb-15746d172ce0" />
+    <Project Path="IntegrationEventLogEF/IntegrationEventLogEF.csproj" Id="238e3586-7441-423d-a5e9-6d992c427ffb" />
   </Folder>
   <Folder Name="/tests/" />
 </Solution>

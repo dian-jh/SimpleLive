@@ -137,10 +137,12 @@ sequenceDiagram
 * **LiveRoom.API:**提供HTTP/REST端点并集成Aspire监控
 
 ```
+以下文件夹均为解决方案文件夹
 实体放到entities文件夹下：
 Domain
 	entities
 		实体
+	DomainEvent(文件夹)(充血模型发布事件用)
 	IxxRepository
 	xxDomainService
 Infrastructure
@@ -156,15 +158,18 @@ API
 		Response
 			响应实体xxx
 		xxController
-		Events(文件夹)
+	Events(文件夹)
 
-将一些微服务公用的放到文件夹Common下，在Common下创建公共模块。例如：EventBus等等
+将一些微服务公用的放到解决方案文件夹Common下，在Common下创建公共模块。例如：EventBus等等
 项目总体文件夹目录结构为：
 解决方案文件夹：
 Solutions Items
 src
 	Commons(文件夹)
 		EventBus(模块)
+		EventBusRabbitMQ
+		IntegrationEventLogEF
+		DomainCommons
 	LiveRoom(文件夹)
 		LiveRoom.Domain
 		LiveRoom.Infrastructure
@@ -205,7 +210,7 @@ User：
 public string NickName { get; private set; }//用户名称
 public string? AvatarUrl { get; private set; }
 public DateTime? DateOfBirth { get; private set; }
-public bool? Gender { get; private set; } // 注意C#里通常用小写的bool，默认为1。1为男，2为女
+public GenderType Gender { get; private set; } = GenderType.Unknown;
 public string? Location { get; private set; }
 public string? Signature { get; private set; }
     
@@ -214,6 +219,13 @@ public int FollowerCount { get; private set; } = 0;//粉丝数
     
 public DateTime CreationTime { get; private set; }
 public DateTime? UpdationTime { get; private set; }
+
+public enum GenderType
+{
+    Unknown = 0,
+    Male = 1,
+    Female = 2
+}
 ```
 
 Room
@@ -263,42 +275,39 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        // 1. 指定表名 (默认是DbSet的名字，显式指定更安全)
+       // 1. 表名重命名
+        // Identity 默认会把用户表命名为 "AspNetUsers"
+        // 通过这里我们可以把它强制改回我们想要的 "T_Users"
         builder.ToTable("T_Users");
 
-        // 2. 设置主键
-        builder.HasKey(u => u.Id);
+        // 注意：不要再配置 builder.HasKey(u => u.Id); 
+        // 父类底层已经配过了！
 
-        // 3. 核心业务字段配置
-        // Account 登录账号：必须唯一，且限制长度，防止恶意注册撑爆数据库
-        builder.Property(u => u.Account)
-               .IsRequired()
-               .HasMaxLength(50);
-        builder.HasIndex(u => u.Account)
-               .IsUnique(); // 【防线】数据库级别的唯一约束
-
-        // PasswordHash 密码哈希：必须有值
-        builder.Property(u => u.PasswordHash)
-               .IsRequired()
-               .HasMaxLength(256); // 哈希值通常较长
-
-        // UserName 昵称：必填，限制长度
-        builder.Property(u => u.UserName)
+        // 2. 核心业务扩展字段配置
+        // NickName 显示昵称：必填，限制长度
+        builder.Property(u => u.NickName)
                .IsRequired()
                .HasMaxLength(50);
 
-        // 4. 可选信息字段配置 (允许为 null)
+        // 3. 可选信息字段配置
         builder.Property(u => u.AvatarUrl)
-               .HasMaxLength(500); // URL 可能会比较长
-
-        builder.Property(u => u.Signature)
-               .HasMaxLength(200);
+               .HasMaxLength(500);
 
         builder.Property(u => u.Location)
                .HasMaxLength(100);
 
+        builder.Property(u => u.Signature)
+               .HasMaxLength(200);
+
+        // DateOfBirth 不需要配置 MaxLength，数据库中会自动映射为 timestamp / datetime 类型
+
+        // 4. 枚举配置
+        // 推荐将枚举在数据库中存为 Int 类型（占用空间小，查询快）
+        // EF Core 默认就会把 Enum 映射为 Int，所以这行可以省略，但写出来语义更清晰
+        builder.Property(u => u.Gender)
+               .HasConversion<int>();
+
         // 5. 统计与时间字段
-        // 设置默认值，防止空异常
         builder.Property(u => u.FollowingCount)
                .HasDefaultValue(0);
                

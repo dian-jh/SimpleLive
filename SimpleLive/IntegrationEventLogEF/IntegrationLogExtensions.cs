@@ -1,4 +1,4 @@
-﻿namespace eShop.IntegrationEventLogEF;
+﻿namespace ZD.IntegrationEventLogEF;
 
 public static class IntegrationLogExtensions
 {

@@ -1,5 +1,5 @@
-﻿using DomainCommons.Models;
-namespace DomainCommons;
+﻿using ZD.DomainCommons.Models;
+namespace ZD.DomainCommons;
 
 public interface IRepository<T> where T : IAggregateRoot
 {

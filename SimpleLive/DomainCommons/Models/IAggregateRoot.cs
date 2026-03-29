@@ -1,4 +1,4 @@
 ﻿
-namespace DomainCommons.Models;
+namespace ZD.DomainCommons.Models;
 
 public interface IAggregateRoot { }

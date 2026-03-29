@@ -1,6 +1,6 @@
 ﻿
 
-namespace DomainCommons;
+namespace ZD.DomainCommons;
 
 public interface IUnitOfWork : IDisposable
 {
