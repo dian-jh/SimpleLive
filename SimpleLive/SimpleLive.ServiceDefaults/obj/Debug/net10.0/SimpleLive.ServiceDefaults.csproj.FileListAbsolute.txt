@@ -1,0 +1,13 @@
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\bin\Debug\net10.0\SimpleLive.ServiceDefaults.deps.json
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\bin\Debug\net10.0\SimpleLive.ServiceDefaults.dll
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\bin\Debug\net10.0\SimpleLive.ServiceDefaults.pdb
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\SimpleLive.ServiceDefaults.csproj.AssemblyReference.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\SimpleLive.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\SimpleLive.ServiceDefaults.AssemblyInfoInputs.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\SimpleLive.ServiceDefaults.AssemblyInfo.cs
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\SimpleLive.ServiceDefaults.csproj.CoreCompileInputs.cache
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\SimpleLive.ServiceDefaults.sourcelink.json
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\SimpleLive.ServiceDefaults.dll
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\refint\SimpleLive.ServiceDefaults.dll
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\SimpleLive.ServiceDefaults.pdb
+E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.ServiceDefaults\obj\Debug\net10.0\ref\SimpleLive.ServiceDefaults.dll

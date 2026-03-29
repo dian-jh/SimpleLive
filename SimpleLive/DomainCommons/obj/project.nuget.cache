@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "7GHmowaqKBs=",
+  "success": true,
+  "projectFilePath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\DomainCommons\\DomainCommons.csproj",
+  "expectedPackageFiles": [
+    "D:\\AppData\\Developer\\NuGet\\mediatr\\14.1.0\\mediatr.14.1.0.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0\\microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.logging.abstractions\\10.0.0\\microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.identitymodel.abstractions\\8.14.0\\microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.identitymodel.jsonwebtokens\\8.14.0\\microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.identitymodel.logging\\8.14.0\\microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.identitymodel.tokens\\8.14.0\\microsoft.identitymodel.tokens.8.14.0.nupkg.sha512"
+  ],
+  "logs": []
+}

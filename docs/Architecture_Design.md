@@ -194,3 +194,194 @@ void ResetStreamKey()等等方法
 
 内部结构大体上上上面这样的结构，看情况增加Extensions文件夹和Exceptions文件夹或者Event文件夹(创建DomainEvent领域事件、IntegrationEvent集成事件)
 
+
+
+### 实体结构
+
+User：
+
+```c#
+//继承Identity<Guid>
+public string NickName { get; private set; }//用户名称
+public string? AvatarUrl { get; private set; }
+public DateTime? DateOfBirth { get; private set; }
+public bool? Gender { get; private set; } // 注意C#里通常用小写的bool，默认为1。1为男，2为女
+public string? Location { get; private set; }
+public string? Signature { get; private set; }
+    
+public int FollowingCount { get; private set; } = 0;//关注数
+public int FollowerCount { get; private set; } = 0;//粉丝数
+    
+public DateTime CreationTime { get; private set; }
+public DateTime? UpdationTime { get; private set; }
+```
+
+Room
+
+```c#
+private Guid Id;
+private string RoomNumber;//房间号
+
+public Guid HostId { get; private set; } // 主播User ID
+public string HostUserName { get; private set; } // 冗余：主播昵称
+public string? HostAvatarUrl { get; private set; } // 冗余：主播头像
+
+public string Title { get; private set; } // 直播间标题
+public string? CoverImageUrl { get; private set; } // 直播封面，放到静态资源服务器上
+
+public string StreamKey { get; private set; } // 推流码 (供SRS验证)
+public RoomStatus Status { get; private set; } // 状态机枚举：Offline, Preparing, Live, Ended
+
+public DateTime CreationTime { get; private set; }
+public DateTime? UpdationTime { get; private set; }
+```
+
+Interaction
+
+```c#
+//不存数据库
+// 弹幕消息结构 (通过 WebSocket 发给前端，无需存 PGSQL)
+public class DanmakuMessage
+{
+    public string RoomId { get; set; }
+    public string SenderId { get; set; }
+    public string SenderName { get; set; } // 谁发的
+    public string Content { get; set; } // 弹幕内容 (最多30字)
+    public DateTime SendTime { get; set; } = DateTime.UtcNow;
+}
+
+// 在线人数结构 (存在 Redis 的 Key-Value 里)
+// Redis Key: "room:{RoomId}:online_count"
+// Value: int (使用 Redis 的 INCR/DECR 指令操作)
+```
+
+Fluent API配置
+
+```c#
+//User
+public class UserConfiguration : IEntityTypeConfiguration<User>
+{
+    public void Configure(EntityTypeBuilder<User> builder)
+    {
+        // 1. 指定表名 (默认是DbSet的名字，显式指定更安全)
+        builder.ToTable("T_Users");
+
+        // 2. 设置主键
+        builder.HasKey(u => u.Id);
+
+        // 3. 核心业务字段配置
+        // Account 登录账号：必须唯一，且限制长度，防止恶意注册撑爆数据库
+        builder.Property(u => u.Account)
+               .IsRequired()
+               .HasMaxLength(50);
+        builder.HasIndex(u => u.Account)
+               .IsUnique(); // 【防线】数据库级别的唯一约束
+
+        // PasswordHash 密码哈希：必须有值
+        builder.Property(u => u.PasswordHash)
+               .IsRequired()
+               .HasMaxLength(256); // 哈希值通常较长
+
+        // UserName 昵称：必填，限制长度
+        builder.Property(u => u.UserName)
+               .IsRequired()
+               .HasMaxLength(50);
+
+        // 4. 可选信息字段配置 (允许为 null)
+        builder.Property(u => u.AvatarUrl)
+               .HasMaxLength(500); // URL 可能会比较长
+
+        builder.Property(u => u.Signature)
+               .HasMaxLength(200);
+
+        builder.Property(u => u.Location)
+               .HasMaxLength(100);
+
+        // 5. 统计与时间字段
+        // 设置默认值，防止空异常
+        builder.Property(u => u.FollowingCount)
+               .HasDefaultValue(0);
+               
+        builder.Property(u => u.FollowerCount)
+               .HasDefaultValue(0);
+
+        builder.Property(u => u.CreationTime)
+               .IsRequired();
+    }
+}
+
+//Room
+public class LiveRoomConfiguration : IEntityTypeConfiguration<LiveRoom>
+{
+    public void Configure(EntityTypeBuilder<LiveRoom> builder)
+    {
+        // 1. 指定表名
+        builder.ToTable("T_LiveRooms");
+
+        // 2. 设置主键
+        builder.HasKey(r => r.Id);
+
+        // 3. 房间号与推流码的极端性能优化
+        // RoomNumber 房间号：观众搜索时的高频字段，必须建唯一索引
+        builder.Property(r => r.RoomNumber)
+               .IsRequired()
+               .HasMaxLength(20);
+        builder.HasIndex(r => r.RoomNumber)
+               .IsUnique(); 
+
+        // StreamKey 推流码：【极其重要】SRS回调鉴权时，是根据它来查房间的！
+        // 如果不建索引，每次推流验证都会全表扫描，严重拖垮性能。
+        builder.Property(r => r.StreamKey)
+               .IsRequired()
+               .HasMaxLength(128);
+        builder.HasIndex(r => r.StreamKey)
+               .IsUnique();
+
+        // 4. 冗余字段配置
+        // HostId：为了方便查“某个人开过哪些直播”，建个普通索引
+        builder.Property(r => r.HostId).IsRequired();
+        builder.HasIndex(r => r.HostId);
+
+        builder.Property(r => r.HostUserName)
+               .IsRequired()
+               .HasMaxLength(50);
+
+        builder.Property(r => r.HostAvatarUrl)
+               .HasMaxLength(500);
+
+        // 5. 房间元数据
+        builder.Property(r => r.Title)
+               .IsRequired()
+               .HasMaxLength(100);
+
+        builder.Property(r => r.CoverImageUrl)
+               .HasMaxLength(500);
+
+        // 6. 状态机映射
+        // PGSQL 中推荐将 Enum 映射为 String 或 Int。
+        // 这里为了查询速度和节省空间，默认存为 Int。
+        builder.Property(r => r.Status)
+               .IsRequired()
+               // 如果你想在数据库里直观看到 "Live" 字母而不是数字 2，可以取消下面这行的注释：
+               // .HasConversion<string>() 
+               ;
+
+        builder.Property(r => r.CreationTime)
+               .IsRequired();
+    }
+}
+```
+
+
+
+## 详细的业务逻辑
+
+### User
+
+- 注册：用户可以根据UserName或者Email邮箱注册账户，UserName的规则是至少八位，最多二十位，最少包含数字和字母，并且必须以字母或数字开头。密码的规则是至少八位，必须包含数字和字母，也是允许使用特殊字符(不强制)
+- 登录：根据用户名和密码去跟数据库进行分析，如果数据库存在这个用户就登录成功，并颁发JWT令牌
+- 资料显示：显示用户头像、昵称、年龄、性别、所在地、个性签名
+- 资料修改：修改新昵称、个性签名、性别、生日、所在地
+
+- 关注的主播数显示：关注数
+- 订阅的粉丝数显示：粉丝数(用于主播显示已被多少人关注，给主播和用户看)

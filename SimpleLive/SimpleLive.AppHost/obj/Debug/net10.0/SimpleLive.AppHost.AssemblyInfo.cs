@@ -26,7 +26,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21b8178b2cb29c20b36bc05800aecba728fe902e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1857fb50c24917827e0be9ef4d07dfb2aa4efcc8")]
 [assembly: System.Reflection.AssemblyProductAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

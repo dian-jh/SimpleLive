@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "0KfeBQDR6KA=",
+  "success": true,
+  "projectFilePath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
+  "expectedPackageFiles": [
+    "D:\\AppData\\Developer\\NuGet\\microsoft.entityframeworkcore\\10.0.4\\microsoft.entityframeworkcore.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.entityframeworkcore.abstractions\\10.0.4\\microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.entityframeworkcore.analyzers\\10.0.4\\microsoft.entityframeworkcore.analyzers.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.entityframeworkcore.relational\\10.0.4\\microsoft.entityframeworkcore.relational.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.caching.abstractions\\10.0.4\\microsoft.extensions.caching.abstractions.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.caching.memory\\10.0.4\\microsoft.extensions.caching.memory.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.configuration.abstractions\\10.0.4\\microsoft.extensions.configuration.abstractions.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.dependencyinjection\\10.0.4\\microsoft.extensions.dependencyinjection.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.dependencyinjection.abstractions\\10.0.5\\microsoft.extensions.dependencyinjection.abstractions.10.0.5.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.logging\\10.0.4\\microsoft.extensions.logging.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.logging.abstractions\\10.0.4\\microsoft.extensions.logging.abstractions.10.0.4.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.options\\10.0.5\\microsoft.extensions.options.10.0.5.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\microsoft.extensions.primitives\\10.0.5\\microsoft.extensions.primitives.10.0.5.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\npgsql\\10.0.2\\npgsql.10.0.2.nupkg.sha512",
+    "D:\\AppData\\Developer\\NuGet\\npgsql.entityframeworkcore.postgresql\\10.0.1\\npgsql.entityframeworkcore.postgresql.10.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,12 +1,139 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|e:\\c#\u002B\\vs2026\\code\\simplelive\\simplelive\\eventbusrabbitmq\\rabbitmqdependencyinjectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|solutionrelative:eventbusrabbitmq\\rabbitmqdependencyinjectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|e:\\c#\u002B\\vs2026\\code\\simplelive\\simplelive\\eventbusrabbitmq\\rabbitmqeventbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|solutionrelative:eventbusrabbitmq\\rabbitmqeventbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|e:\\c#\u002B\\vs2026\\code\\simplelive\\simplelive\\eventbusrabbitmq\\globalusings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|solutionrelative:eventbusrabbitmq\\globalusings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|e:\\c#\u002B\\vs2026\\code\\simplelive\\simplelive\\eventbusrabbitmq\\eventbusoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|solutionrelative:eventbusrabbitmq\\eventbusoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|e:\\c#\u002B\\vs2026\\code\\simplelive\\simplelive\\eventbusrabbitmq\\activityextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|solutionrelative:eventbusrabbitmq\\activityextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|e:\\c#\u002B\\vs2026\\code\\simplelive\\simplelive\\eventbusrabbitmq\\rabbitmqtelemetry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCA479E1-2939-4500-8842-87D5EECB4E2B}|EventBusRabbitMQ\\EventBusRabbitMQ.csproj|solutionrelative:eventbusrabbitmq\\rabbitmqtelemetry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C7BBF54-398B-40BD-879C-87DC71FBC2F6}|EventBus\\EventBus.csproj|e:\\c#\u002B\\vs2026\\code\\simplelive\\simplelive\\eventbus\\extensions\\eventbusbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C7BBF54-398B-40BD-879C-87DC71FBC2F6}|EventBus\\EventBus.csproj|solutionrelative:eventbus\\extensions\\eventbusbuilderextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 1271,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ActivityExtensions.cs",
+              "DocumentMoniker": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\ActivityExtensions.cs",
+              "RelativeDocumentMoniker": "EventBusRabbitMQ\\ActivityExtensions.cs",
+              "ToolTip": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\ActivityExtensions.cs",
+              "RelativeToolTip": "EventBusRabbitMQ\\ActivityExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T09:39:19.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RabbitMQTelemetry.cs",
+              "DocumentMoniker": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\RabbitMQTelemetry.cs",
+              "RelativeDocumentMoniker": "EventBusRabbitMQ\\RabbitMQTelemetry.cs",
+              "ToolTip": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\RabbitMQTelemetry.cs",
+              "RelativeToolTip": "EventBusRabbitMQ\\RabbitMQTelemetry.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T09:36:58.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RabbitMQEventBus.cs",
+              "DocumentMoniker": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\RabbitMQEventBus.cs",
+              "RelativeDocumentMoniker": "EventBusRabbitMQ\\RabbitMQEventBus.cs",
+              "ToolTip": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\RabbitMQEventBus.cs",
+              "RelativeToolTip": "EventBusRabbitMQ\\RabbitMQEventBus.cs",
+              "ViewState": "AgIAAMYAAAAAAAAAAIAxwNYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T09:36:52.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RabbitMqDependencyInjectionExtensions.cs",
+              "DocumentMoniker": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\RabbitMqDependencyInjectionExtensions.cs",
+              "RelativeDocumentMoniker": "EventBusRabbitMQ\\RabbitMqDependencyInjectionExtensions.cs",
+              "ToolTip": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\RabbitMqDependencyInjectionExtensions.cs",
+              "RelativeToolTip": "EventBusRabbitMQ\\RabbitMqDependencyInjectionExtensions.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAmwBQAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T09:36:45.381Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GlobalUsings.cs",
+              "DocumentMoniker": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\GlobalUsings.cs",
+              "RelativeDocumentMoniker": "EventBusRabbitMQ\\GlobalUsings.cs",
+              "ToolTip": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\GlobalUsings.cs",
+              "RelativeToolTip": "EventBusRabbitMQ\\GlobalUsings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T09:36:36.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EventBusOptions.cs",
+              "DocumentMoniker": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusOptions.cs",
+              "RelativeDocumentMoniker": "EventBusRabbitMQ\\EventBusOptions.cs",
+              "ToolTip": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusOptions.cs",
+              "RelativeToolTip": "EventBusRabbitMQ\\EventBusOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T09:13:39.762Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EventBusBuilderExtensions.cs",
+              "DocumentMoniker": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\Extensions\\EventBusBuilderExtensions.cs",
+              "RelativeDocumentMoniker": "EventBus\\Extensions\\EventBusBuilderExtensions.cs",
+              "ToolTip": "E:\\C#\u002B\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\Extensions\\EventBusBuilderExtensions.cs",
+              "RelativeToolTip": "EventBus\\Extensions\\EventBusBuilderExtensions.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAkwCMAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T09:03:15.847Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

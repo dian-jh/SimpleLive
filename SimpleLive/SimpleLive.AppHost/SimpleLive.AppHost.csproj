@@ -8,4 +8,8 @@
     <UserSecretsId>2f07bc72-2246-4151-aad7-efd61608cc7e</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ApiGateway\ApiGateway.csproj" />
+  </ItemGroup>
+
 </Project>
