@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj": {}
+    "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj": {}
   },
   "projects": {
-    "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj": {
+    "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
+        "projectUniqueName": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
         "projectName": "EventBusRabbitMQ",
-        "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
+        "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
         "packagesPath": "D:\\AppData\\Developer\\NuGet",
-        "outputPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\obj\\",
+        "outputPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\学习\\vs2022\\共享组件\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj": {
-                "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj"
+              "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj": {
+                "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj"
               }
             }
           }
@@ -353,14 +353,14 @@
         }
       }
     },
-    "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj": {
+    "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj",
+        "projectUniqueName": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj",
         "projectName": "EventBus",
-        "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj",
+        "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj",
         "packagesPath": "D:\\AppData\\Developer\\NuGet",
-        "outputPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\obj\\",
+        "outputPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\学习\\vs2022\\共享组件\\NuGetPackages"
@@ -698,14 +698,14 @@
         }
       }
     },
-    "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj": {
+    "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj",
+        "projectUniqueName": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj",
         "projectName": "IntegrationEvents",
-        "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj",
+        "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj",
         "packagesPath": "D:\\AppData\\Developer\\NuGet",
-        "outputPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\obj\\",
+        "outputPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\学习\\vs2022\\共享组件\\NuGetPackages"
@@ -726,8 +726,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj": {
-                "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj"
+              "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj": {
+                "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj"
               }
             }
           }

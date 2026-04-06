@@ -4,5 +4,6 @@
     <Import Project="$(NuGetPackageRoot)\yarp.reverseproxy\2.3.0\buildTransitive\net8.0\Yarp.ReverseProxy.targets" Condition="Exists('$(NuGetPackageRoot)\yarp.reverseproxy\2.3.0\buildTransitive\net8.0\Yarp.ReverseProxy.targets')" />
     <Import Project="$(NuGetPackageRoot)\microsoft.extensions.telemetry.abstractions\10.1.0\buildTransitive\net8.0\Microsoft.Extensions.Telemetry.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)\microsoft.extensions.telemetry.abstractions\10.1.0\buildTransitive\net8.0\Microsoft.Extensions.Telemetry.Abstractions.targets')" />
     <Import Project="$(NuGetPackageRoot)\microsoft.extensions.http.resilience\10.1.0\buildTransitive\net8.0\Microsoft.Extensions.Http.Resilience.targets" Condition="Exists('$(NuGetPackageRoot)\microsoft.extensions.http.resilience\10.1.0\buildTransitive\net8.0\Microsoft.Extensions.Http.Resilience.targets')" />
+    <Import Project="$(NuGetPackageRoot)\aspire.rabbitmq.client\13.2.0\buildTransitive\net10.0\Aspire.RabbitMQ.Client.targets" Condition="Exists('$(NuGetPackageRoot)\aspire.rabbitmq.client\13.2.0\buildTransitive\net10.0\Aspire.RabbitMQ.Client.targets')" />
   </ImportGroup>
 </Project>

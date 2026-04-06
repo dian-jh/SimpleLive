@@ -15,7 +15,7 @@ public class ApiGateway : global::Aspire.Hosting.IProjectMetadata
     /// <summary>
     /// The path to the ApiGateway project.
     /// </summary>
-    public string ProjectPath => """E:\C#+\vs2026\code\SimpleLive\SimpleLive\ApiGateway\ApiGateway.csproj""";
+    public string ProjectPath => """E:\CSharp\vs2026\code\SimpleLive\SimpleLive\ApiGateway\ApiGateway.csproj""";
 
     /// <summary>
     /// Gets a value indicating whether building the project before running it should be suppressed.

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IntegrationEventLogEF")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b74dccc820ea544e7a83d045ec64bd7c5238cba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a190db3c5817d485c418c464e1bb83643a37ea86")]
 [assembly: System.Reflection.AssemblyProductAttribute("IntegrationEventLogEF")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IntegrationEventLogEF")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

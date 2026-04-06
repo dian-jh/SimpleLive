@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="13.2.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\EventBus\EventBus.csproj" />
+    <ProjectReference Include="..\..\..\IntegrationEvent\IntegrationEvents.csproj" />
+    <ProjectReference Include="..\..\..\SimpleLive.ServiceDefaults\SimpleLive.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Commons\ZD.JWT\ZD.JWT.csproj" />
+    <ProjectReference Include="..\User.Domain\UserService.Domain.csproj" />
+    <ProjectReference Include="..\User.Infrastructure\UserService.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,6 +1,8 @@
 import { motion } from "motion/react";
 import { Users } from "lucide-react";
 
+import { Link } from "react-router";
+
 interface StreamCardProps {
   id: string;
   title: string;
@@ -12,15 +14,16 @@ interface StreamCardProps {
   tags?: string[];
 }
 
-export function StreamCard({ title, thumbnailUrl, streamerName, streamerAvatar, viewerCount }: StreamCardProps) {
+export function StreamCard({ id, title, thumbnailUrl, streamerName, streamerAvatar, viewerCount }: StreamCardProps) {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="group flex flex-col cursor-pointer bg-white rounded-2xl shadow-[0_2px_8px_rgb(0,0,0,0.04)] border border-slate-100/50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-    >
+    <Link to={`/room/${id}`}>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="group flex flex-col cursor-pointer bg-white rounded-2xl shadow-[0_2px_8px_rgb(0,0,0,0.04)] border border-slate-100/50 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+      >
       {/* Thumbnail Container */}
       <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
         <img 
@@ -66,5 +69,6 @@ export function StreamCard({ title, thumbnailUrl, streamerName, streamerAvatar, 
         </div>
       </div>
     </motion.div>
+    </Link>
   );
 }

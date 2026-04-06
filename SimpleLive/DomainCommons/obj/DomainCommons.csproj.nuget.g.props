@@ -13,4 +13,7 @@
     <SourceRoot Include="D:\AppData\Developer\NuGet\" />
     <SourceRoot Include="D:\学习\vs2022\共享组件\NuGetPackages\" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)\microsoft.entityframeworkcore\10.0.5\buildTransitive\net10.0\Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)\microsoft.entityframeworkcore\10.0.5\buildTransitive\net10.0\Microsoft.EntityFrameworkCore.props')" />
+  </ImportGroup>
 </Project>

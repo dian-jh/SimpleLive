@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8ddh+ca/UT0=",
+  "dgSpecHash": "PaD/6Ux0ozI=",
   "success": true,
-  "projectFilePath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj",
+  "projectFilePath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEvent\\IntegrationEvents.csproj",
   "expectedPackageFiles": [
     "D:\\AppData\\Developer\\NuGet\\aspire.rabbitmq.client\\13.2.0\\aspire.rabbitmq.client.13.2.0.nupkg.sha512",
     "D:\\AppData\\Developer\\NuGet\\aspnetcore.healthchecks.rabbitmq\\9.0.0\\aspnetcore.healthchecks.rabbitmq.9.0.0.nupkg.sha512",

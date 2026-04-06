@@ -232,7 +232,7 @@ Room
 
 ```c#
 private Guid Id;
-private string RoomNumber;//房间号
+private string RoomNumber;//房间号:4-6位唯一的短数字
 
 public Guid HostId { get; private set; } // 主播User ID
 public string HostUserName { get; private set; } // 冗余：主播昵称
@@ -324,38 +324,43 @@ public class LiveRoomConfiguration : IEntityTypeConfiguration<LiveRoom>
 {
     public void Configure(EntityTypeBuilder<LiveRoom> builder)
     {
-        // 1. 指定表名
+       // 1. 指定表名
         builder.ToTable("T_LiveRooms");
 
         // 2. 设置主键
         builder.HasKey(r => r.Id);
 
-        // 3. 房间号与推流码的极端性能优化
-        // RoomNumber 房间号：观众搜索时的高频字段，必须建唯一索引
+        // 3. 极端性能优化：高频检索与鉴权字段
+        // RoomNumber：修改为 MaxLength(10)
         builder.Property(r => r.RoomNumber)
                .IsRequired()
-               .HasMaxLength(20);
+               .HasMaxLength(10); // 既然业务规定是4-6位，就没必要留20，10足够了，能进一步压缩B+树索引节点的大小
+               
         builder.HasIndex(r => r.RoomNumber)
                .IsUnique(); 
 
-        // StreamKey 推流码：【极其重要】SRS回调鉴权时，是根据它来查房间的！
-        // 如果不建索引，每次推流验证都会全表扫描，严重拖垮性能。
+        // StreamKey：推流鉴权核心字段
         builder.Property(r => r.StreamKey)
                .IsRequired()
                .HasMaxLength(128);
+               
         builder.HasIndex(r => r.StreamKey)
                .IsUnique();
 
-        // 4. 冗余字段配置
-        // HostId：为了方便查“某个人开过哪些直播”，建个普通索引
-        builder.Property(r => r.HostId).IsRequired();
-        builder.HasIndex(r => r.HostId);
+        // 4. 关联字段与冗余数据
+        builder.Property(r => r.HostId)
+               .IsRequired();
+               
+        builder.HasIndex(r => r.HostId); // 普通索引：用于查询“某主播的直播历史”
 
         builder.Property(r => r.HostUserName)
                .IsRequired()
                .HasMaxLength(50);
 
+        // 【严谨细节】：虽然 C# 里的 string? 开启可空引用类型后 EF 会自动识别，
+        // 但在 Fluent API 中显式声明 .IsRequired(false) 是更优的工程实践。
         builder.Property(r => r.HostAvatarUrl)
+               .IsRequired(false) 
                .HasMaxLength(500);
 
         // 5. 房间元数据
@@ -364,19 +369,21 @@ public class LiveRoomConfiguration : IEntityTypeConfiguration<LiveRoom>
                .HasMaxLength(100);
 
         builder.Property(r => r.CoverImageUrl)
+               .IsRequired(false)
                .HasMaxLength(500);
 
         // 6. 状态机映射
-        // PGSQL 中推荐将 Enum 映射为 String 或 Int。
-        // 这里为了查询速度和节省空间，默认存为 Int。
         builder.Property(r => r.Status)
-               .IsRequired()
-               // 如果你想在数据库里直观看到 "Live" 字母而不是数字 2，可以取消下面这行的注释：
-               // .HasConversion<string>() 
-               ;
+               .IsRequired();
+               // 默认存入 int。查询效率最高。
 
+        // 7. 审计时间
         builder.Property(r => r.CreationTime)
                .IsRequired();
+
+        // UpdationTime 是 DateTime?，显式配置非必填项
+        builder.Property(r => r.UpdationTime)
+               .IsRequired(false);
     }
 }
 ```
@@ -394,3 +401,22 @@ public class LiveRoomConfiguration : IEntityTypeConfiguration<LiveRoom>
 
 - 关注的主播数显示：关注数
 - 订阅的粉丝数显示：粉丝数(用于主播显示已被多少人关注，给主播和用户看)
+
+### Room
+
+- 首页信息
+- 直播间信息
+- 创建房间
+- 心跳监测：使用redis来看观众人数
+- 开播
+- 关播
+
+
+
+### 代码生成架构红线
+
+- **领域层 (Domain)：** `User` 实体必须继承自 `DomainCommons.Models.Entity` 和 `IAggregateRoot`。严禁在实体中直接注入任何服务。
+- **仓储层 (Infrastructure)：** 必须定义 `IUserRepository : IRepository<User>`。`UserDbContext` 必须实现 `IUnitOfWork`，并在 `SaveEntitiesAsync` 中调用 Mediator 分发领域事件后再 SaveChanges。
+- **应用层 (CQRS + MediatR)：** **严禁在 Controller 中编写任何业务逻辑！** 所有业务必须封装为 `Command` (如 `RegisterUserCommand`) 或 `Query`，交由 MediatR 的 `IRequestHandler` 处理。
+- **控制器 (API)：** Controller 只允许做两件事：接收请求并触发 `_mediator.Send()`，然后将结果转化为 HTTP 状态码返回（遵循 RFC 7807）。
+- **验证 (FluentValidation)：** 将验证器与 MediatR 的 Pipeline Behavior 结合（或在 Endpoint 处拦截），不要在 Handler 内手动调 Validate。

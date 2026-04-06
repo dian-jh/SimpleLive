@@ -37,26 +37,26 @@ export function Navbar() {
 
         {/* Right: Actions */}
         <div className="flex items-center gap-5">
-          <button className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-[14px] font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-slate-300/50 hover:-translate-y-0.5">
+          <Link to="/stream/select" className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-[14px] font-medium rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-slate-300/50 hover:-translate-y-0.5">
             <Plus className="w-4 h-4" />
             <span>我要开播</span>
-          </button>
+          </Link>
           
           <div className="h-5 w-px bg-slate-200 hidden lg:block mx-1"></div>
           
-          <Link to="#" className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 transition-colors group">
+          <Link to="/profile" className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 transition-colors group">
             <Heart className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
             <span className="text-[11px] font-medium hidden md:block mt-0.5">关注</span>
           </Link>
           
-          <Link to="#" className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 transition-colors group">
+          <Link to="/profile" className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 transition-colors group">
             <Clock className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
             <span className="text-[11px] font-medium hidden md:block mt-0.5">历史</span>
           </Link>
 
-          <button className="ml-3 w-[38px] h-[38px] rounded-full overflow-hidden border-2 border-transparent hover:border-slate-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 hover:shadow-md">
+          <Link to="/profile" className="ml-3 w-[38px] h-[38px] rounded-full overflow-hidden border-2 border-transparent hover:border-slate-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 hover:shadow-md">
              <img src="https://images.unsplash.com/photo-1643816831186-b2427a8f9f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhc2lhbiUyMHdvbWFuJTIwc21pbGluZyUyMHBvcnRyYWl0fGVufDF8fHx8MTc3NDQ5MjE0NXww&ixlib=rb-4.1.0&q=80&w=200" alt="User avatar" className="w-full h-full object-cover" />
-          </button>
+          </Link>
         </div>
       </div>
     </header>

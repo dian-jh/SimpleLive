@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0KfeBQDR6KA=",
+  "dgSpecHash": "EEp+M4UoweI=",
   "success": true,
-  "projectFilePath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
+  "projectFilePath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
   "expectedPackageFiles": [
     "D:\\AppData\\Developer\\NuGet\\microsoft.entityframeworkcore\\10.0.4\\microsoft.entityframeworkcore.10.0.4.nupkg.sha512",
     "D:\\AppData\\Developer\\NuGet\\microsoft.entityframeworkcore.abstractions\\10.0.4\\microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512",

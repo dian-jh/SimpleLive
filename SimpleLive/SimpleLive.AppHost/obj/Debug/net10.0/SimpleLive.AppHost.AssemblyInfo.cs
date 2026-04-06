@@ -12,21 +12,19 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("2f07bc72-2246-4151-aad7-efd61608cc7e")]
-[assembly: System.Reflection.AssemblyMetadata("dcpclipath", "D:\\AppData\\Developer\\NuGet\\aspire.hosting.orchestration.win-x64\\13.1.3\\tools\\dcp." +
+[assembly: System.Reflection.AssemblyMetadata("dcpclipath", "D:\\AppData\\Developer\\NuGet\\aspire.hosting.orchestration.win-x64\\13.2.0\\tools\\dcp." +
     "exe")]
-[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", "D:\\AppData\\Developer\\NuGet\\aspire.hosting.orchestration.win-x64\\13.1.3\\tools\\ext\\" +
+[assembly: System.Reflection.AssemblyMetadata("dcpextensionpaths", "D:\\AppData\\Developer\\NuGet\\aspire.hosting.orchestration.win-x64\\13.2.0\\tools\\ext\\" +
     "")]
-[assembly: System.Reflection.AssemblyMetadata("dcpbinpath", "D:\\AppData\\Developer\\NuGet\\aspire.hosting.orchestration.win-x64\\13.1.3\\tools\\ext\\" +
-    "bin\\")]
-[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\SimpleLive.AppHost")]
+[assembly: System.Reflection.AssemblyMetadata("apphostprojectpath", "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyMetadata("apphostprojectname", "SimpleLive.AppHost.csproj")]
-[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "D:\\AppData\\Developer\\NuGet\\aspire.dashboard.sdk.win-x64\\13.1.3\\tools\\Aspire.Dashb" +
+[assembly: System.Reflection.AssemblyMetadata("aspiredashboardpath", "D:\\AppData\\Developer\\NuGet\\aspire.dashboard.sdk.win-x64\\13.2.0\\tools\\Aspire.Dashb" +
     "oard.exe")]
-[assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\SimpleLive.AppHost\\obj\\")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("apphostprojectbaseintermediateoutputpath", "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\SimpleLive.AppHost\\obj\\")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b74dccc820ea544e7a83d045ec64bd7c5238cba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a190db3c5817d485c418c464e1bb83643a37ea86")]
 [assembly: System.Reflection.AssemblyProductAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

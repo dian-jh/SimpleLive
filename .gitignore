@@ -1,1 +1,15 @@
+# .NET
+bin/
+obj/
+
+
+# Node / Frontend
+node_modules/
+dist/
+
+# VS / VS Code
 .vs/
+.vscode/
+
+# Logs
+*.log

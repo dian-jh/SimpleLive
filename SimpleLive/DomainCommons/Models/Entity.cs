@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using DomainCommons;
+using MediatR;
 
 namespace ZD.DomainCommons.Models;
 
-public abstract class Entity
+public abstract class Entity : IHasDomainEvents
 {
     int? _requestedHashCode;
     int _Id;

@@ -11,6 +11,18 @@
     <Project Path="EventBusRabbitMQ/EventBusRabbitMQ.csproj" Id="cca479e1-2939-4500-8842-87d5eecb4e2b" />
     <Project Path="IntegrationEvent/IntegrationEvents.csproj" Id="971159e3-3088-4eb8-83bb-15746d172ce0" />
     <Project Path="IntegrationEventLogEF/IntegrationEventLogEF.csproj" Id="238e3586-7441-423d-a5e9-6d992c427ffb" />
+    <Project Path="src/Commons/ZD.JWT/ZD.JWT.csproj" />
+    <Project Path="ZD.Transaction/ZD.Transaction.csproj" Id="787ad7a9-fc44-423b-8af3-de0a1e703f01" />
+  </Folder>
+  <Folder Name="/src/RoomService/">
+    <Project Path="RoomService.Domain/RoomService.Domain.csproj" Id="a0210efd-f344-466e-9710-0bc35be36428" />
+    <Project Path="RoomService.Infrastructure/RoomService.Infrastructure.csproj" Id="f5db897b-82aa-41d6-a736-03b4ce390f67" />
+    <Project Path="RoomService.WebAPI/RoomService.WebAPI.csproj" />
+  </Folder>
+  <Folder Name="/src/UserService/">
+    <Project Path="src/User/User.API/UserService.API.csproj" />
+    <Project Path="src/User/User.Domain/UserService.Domain.csproj" />
+    <Project Path="src/User/User.Infrastructure/UserService.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/" />
 </Solution>

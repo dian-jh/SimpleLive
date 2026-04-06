@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "K3Rmz3zIIeE=",
+  "dgSpecHash": "ol0iSjX+Wgc=",
   "success": true,
-  "projectFilePath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
+  "projectFilePath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
   "expectedPackageFiles": [
     "D:\\AppData\\Developer\\NuGet\\aspire.rabbitmq.client\\13.2.0\\aspire.rabbitmq.client.13.2.0.nupkg.sha512",
     "D:\\AppData\\Developer\\NuGet\\aspnetcore.healthchecks.rabbitmq\\9.0.0\\aspnetcore.healthchecks.rabbitmq.9.0.0.nupkg.sha512",

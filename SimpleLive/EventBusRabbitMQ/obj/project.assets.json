@@ -1312,11 +1312,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
+      "projectUniqueName": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
       "projectName": "EventBusRabbitMQ",
-      "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
+      "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\EventBusRabbitMQ.csproj",
       "packagesPath": "D:\\AppData\\Developer\\NuGet",
-      "outputPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\obj\\",
+      "outputPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBusRabbitMQ\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\学习\\vs2022\\共享组件\\NuGetPackages"
@@ -1337,8 +1337,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj": {
-              "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj"
+            "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj": {
+              "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj"
             }
           }
         }

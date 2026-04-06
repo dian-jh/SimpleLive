@@ -17,5 +17,5 @@ public class SimpleLive_AppHost
     /// <summary>
     /// The path to the Aspire Host project.
     /// </summary>
-    public static string ProjectPath => """E:\C#+\vs2026\code\SimpleLive\SimpleLive\SimpleLive.AppHost""";
+    public static string ProjectPath => """E:\CSharp\vs2026\code\SimpleLive\SimpleLive\SimpleLive.AppHost""";
 }

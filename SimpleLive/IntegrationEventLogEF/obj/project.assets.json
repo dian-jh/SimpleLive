@@ -721,11 +721,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
+      "projectUniqueName": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
       "projectName": "IntegrationEventLogEF",
-      "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
+      "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\IntegrationEventLogEF.csproj",
       "packagesPath": "D:\\AppData\\Developer\\NuGet",
-      "outputPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\obj\\",
+      "outputPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\IntegrationEventLogEF\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\学习\\vs2022\\共享组件\\NuGetPackages"
@@ -746,8 +746,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj": {
-              "projectPath": "E:\\C#+\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj"
+            "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj": {
+              "projectPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\EventBus\\EventBus.csproj"
             }
           }
         }
