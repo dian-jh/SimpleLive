@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // 创建 axios 实例
 const request = axios.create({
-    baseURL: 'http://localhost:55487', // 这里以后换成你 YARP 网关的地址
+    baseURL: 'https://localhost:55486', // 这里以后换成你 YARP 网关的地址
     timeout: 10000, // 超时时间
 });
 

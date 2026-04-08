@@ -16,13 +16,13 @@ interface RegisterFormProps {
 }
 
 interface RegisterFormState {
-  account: string
+  Account: string
   password: string
   confirmPassword: string
 }
 
 const INITIAL_STATE: RegisterFormState = {
-  account: '',
+  Account: '',
   password: '',
   confirmPassword: '',
 }
@@ -36,19 +36,39 @@ export const RegisterForm = ({ onSubmit, isLoading, onGoLogin }: RegisterFormPro
   const passwordHint =
     form.password.length > 0 && form.password.length < 6
       ? '密码长度至少 6 位'
-      : '建议使用字母 + 数字组合，安全性更高'
+      : '密码至少包含数字+字母'
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const account = form.account.trim()
+    const account = form.Account.trim()
     if (!account) {
-      setErrorText('请输入手机号或邮箱')
+      setErrorText('请输入账号或邮箱')
       return
     }
 
-    if (form.password.length < 6) {
-      setErrorText('密码长度不能少于 6 位')
+    // --- 1. 账号/邮箱的前端格式校验 ---
+    const isEmail = account.includes('@')
+    if (isEmail) {
+      // 邮箱格式基础正则验证
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(account)) {
+        setErrorText('邮箱格式不正确')
+        return
+      }
+    } else {
+      // 用户名正则验证 (直接复用后端的规则：6-20位，包含字母和数字...)
+      const userNameRegex = /^(?=.{6,20}$)(?=.*[A-Za-z])(?=.*\d)[A-Za-z0-9][A-Za-z0-9._-]*$/
+      if (!userNameRegex.test(account)) {
+        setErrorText('用户名必须为6-20位，包含字母和数字，且以字母或数字开头')
+        return
+      }
+    }
+
+    // --- 2. 密码的前端格式校验 (与后端同步对齐) ---
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/
+    if (!passwordRegex.test(form.password)) {
+      setErrorText('密码至少6位，且必须包含字母和数字')
       return
     }
 
@@ -57,11 +77,12 @@ export const RegisterForm = ({ onSubmit, isLoading, onGoLogin }: RegisterFormPro
       return
     }
 
+    // --- 3. 校验全部通过，清理报错并组装提交数据 ---
     setErrorText(null)
-    const isEmail = account.includes('@')
+
+    // 直接传入 Account 和 Password，把判断到底是邮箱还是用户名的重任交给后端
     void onSubmit({
-      UserName: isEmail ? undefined : account,
-      Email: isEmail ? account : undefined,
+      Account: account,
       Password: form.password,
     })
   }
@@ -78,11 +99,11 @@ export const RegisterForm = ({ onSubmit, isLoading, onGoLogin }: RegisterFormPro
           type="text"
           required
           disabled={isLoading}
-          value={form.account}
+          value={form.Account}
           onChange={(event) =>
-            setForm((prev) => ({ ...prev, account: event.target.value }))
+            setForm((prev) => ({ ...prev, Account: event.target.value }))
           }
-          placeholder="请输入手机号/邮箱"
+          placeholder="请输入账号/邮箱"
           leftIcon={<PhoneIcon className="h-4 w-4" />}
         />
 
@@ -147,13 +168,12 @@ export const RegisterForm = ({ onSubmit, isLoading, onGoLogin }: RegisterFormPro
         />
 
         <p
-          className={`min-h-5 text-xs ${
-            errorText
-              ? 'text-rose-500'
-              : form.password.length > 0 && form.password.length < 6
-                ? 'text-amber-500'
-                : 'text-slate-500'
-          }`}
+          className={`min-h-5 text-xs ${errorText
+            ? 'text-rose-500'
+            : form.password.length > 0 && form.password.length < 6
+              ? 'text-amber-500'
+              : 'text-slate-500'
+            }`}
         >
           {errorText ?? passwordHint}
         </p>

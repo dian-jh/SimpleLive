@@ -14,13 +14,11 @@ public sealed class RoomDomainService
     public RoomDomainService(
         IRoomRepository repository,
         IRoomNumberGenerator roomNumberGenerator,
-        IStreamKeyTokenService streamKeyTokenService,
-        IRoomOnlineCounter roomOnlineCounter)
+        IStreamKeyTokenService streamKeyTokenService)
     {
         _repository = repository;
         _roomNumberGenerator = roomNumberGenerator;
         _streamKeyTokenService = streamKeyTokenService;
-        _roomOnlineCounter = roomOnlineCounter;
     }
 
     public async Task<(bool Success, LiveRoom? Room, string ErrorMessage)> PrepareLiveStreamAsync(
@@ -194,31 +192,6 @@ public sealed class RoomDomainService
             CurrentStreamKey: room.CurrentStreamKey);
 
         return (true, detail, string.Empty);
-    }
-
-    public async Task<(bool Success, RoomHeartbeatResult? Result, string ErrorMessage)> HandleHeartbeatAsync(
-        string roomNumber,
-        string viewerId,
-        CancellationToken cancellationToken = default)
-    {
-        if (string.IsNullOrWhiteSpace(roomNumber))
-        {
-            return (false, null, "房间号不能为空");
-        }
-
-        if (string.IsNullOrWhiteSpace(viewerId))
-        {
-            return (false, null, "观众标识不能为空");
-        }
-
-        var room = await _repository.FindByRoomNumberAsync(roomNumber.Trim(), cancellationToken);
-        if (room is null)
-        {
-            return (false, null, "直播间不存在");
-        }
-
-        var onlineCount = await _roomOnlineCounter.HeartbeatAsync(room.RoomNumber, viewerId.Trim(), cancellationToken);
-        return (true, new RoomHeartbeatResult(room.RoomNumber, viewerId.Trim(), onlineCount), string.Empty);
     }
 
     public async Task<int> SyncHostProfileAndSaveAsync(

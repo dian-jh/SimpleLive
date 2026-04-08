@@ -8,8 +8,7 @@ export interface AuthErrorResponse {
 }
 
 export interface RegisterRequestDto {
-  UserName?: string
-  Email?: string
+  Account: string
   Password: string
 }
 

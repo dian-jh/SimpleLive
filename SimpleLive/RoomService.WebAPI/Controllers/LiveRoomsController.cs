@@ -116,27 +116,4 @@ public sealed class LiveRoomsController : ControllerBase
         return Ok(response);
     }
 
-    [HttpPost("{roomNumber}/heartbeat")]
-    public async Task<IActionResult> Heartbeat(
-        [FromRoute] string roomNumber,
-        [FromBody] HeartbeatRequest request,
-        CancellationToken cancellationToken)
-    {
-        var (success, heartbeat, errorMessage) = await _domainService.HandleHeartbeatAsync(
-            roomNumber: roomNumber,
-            viewerId: request.ViewerId,
-            cancellationToken: cancellationToken);
-
-        if (!success || heartbeat is null)
-        {
-            return BadRequest(new { Message = errorMessage });
-        }
-
-        return Ok(new RoomHeartbeatResponse
-        {
-            RoomNumber = heartbeat.RoomNumber,
-            ViewerId = heartbeat.ViewerId,
-            OnlineCount = heartbeat.OnlineCount
-        });
-    }
 }

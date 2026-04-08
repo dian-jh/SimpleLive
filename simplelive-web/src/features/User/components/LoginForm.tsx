@@ -51,7 +51,7 @@ export const LoginForm = ({ onSubmit, isLoading, onGoRegister }: LoginFormProps)
           onChange={(event) =>
             setForm((prev) => ({ ...prev, Account: event.target.value }))
           }
-          placeholder="请输入手机号/邮箱"
+          placeholder="请输入账号/邮箱"
           leftIcon={<PhoneIcon className="h-4 w-4" />}
         />
 

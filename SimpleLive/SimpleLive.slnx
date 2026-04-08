@@ -14,6 +14,11 @@
     <Project Path="src/Commons/ZD.JWT/ZD.JWT.csproj" />
     <Project Path="ZD.Transaction/ZD.Transaction.csproj" Id="787ad7a9-fc44-423b-8af3-de0a1e703f01" />
   </Folder>
+  <Folder Name="/src/InteractionService/">
+    <Project Path="InteractionService.Domain/InteractionService.Domain.csproj" Id="b6268400-d218-4ee1-b29a-cbb6e60befff" />
+    <Project Path="InteractionService.Infrastructure/InteractionService.Infrastructure.csproj" Id="d667f0a8-6f54-4e14-b538-84435dcdfe83" />
+    <Project Path="InteractionService.WebAPI/InteractionService.WebAPI.csproj" />
+  </Folder>
   <Folder Name="/src/RoomService/">
     <Project Path="RoomService.Domain/RoomService.Domain.csproj" Id="a0210efd-f344-466e-9710-0bc35be36428" />
     <Project Path="RoomService.Infrastructure/RoomService.Infrastructure.csproj" Id="f5db897b-82aa-41d6-a736-03b4ce390f67" />

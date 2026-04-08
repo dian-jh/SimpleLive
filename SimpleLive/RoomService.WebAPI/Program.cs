@@ -6,7 +6,6 @@ using RoomService.Domain;
 using RoomService.Infrastructure;
 using RoomService.Infrastructure.Extensions;
 using RoomService.WebAPI;
-using RoomService.WebAPI.BackgroundServices;
 using RoomService.WebAPI.Events.IntegrationEvents;
 using RoomService.WebAPI.Validators;
 using SimpleLive.ServiceDefaults;
@@ -27,7 +26,7 @@ builder.Services.AddExceptionHandler<ValidationExceptionHandler>();
 builder.Services.AddProblemDetails();
 
 builder.Services.AddRoomInfrastructure(builder.Configuration);
-builder.Services.AddHostedService<RoomHeartbeatCleanupBackgroundService>();
+
 
 builder.Services.AddDbContext<RoomDbContext>(options =>
 {

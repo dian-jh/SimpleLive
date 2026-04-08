@@ -22,8 +22,7 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
-        string Account = request.Email == null ? request.UserName : request.Email;
-        var (success, errorMsg) = await _domainService.RegisterAsync(Account, request.Password);
+        var (success, errorMsg) = await _domainService.RegisterAsync(request.Account, request.Password);
 
         if (!success)
             return BadRequest(new { Message = errorMsg }); // 遵循 RESTful，失败返回 400

@@ -22,7 +22,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fe62c69f3a740d45cef064d18e627707049ba723")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e0731b5e4b0e27a021ac0a5f5ddc8b825a7da07")]
 [assembly: System.Reflection.AssemblyProductAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SimpleLive.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -39,7 +39,7 @@ public static class DependencyInjectionExtensions
         services.AddScoped<RoomDomainService>();
         services.AddScoped<IRoomNumberGenerator, RedisRoomNumberGenerator>();
         services.AddScoped<IStreamKeyTokenService, AesStreamKeyTokenService>();
-        services.AddSingleton<IRoomOnlineCounter, RedisRoomOnlineCounter>();
+        services.AddScoped<IRoomOnlineCounter, RedisRoomOnlineCounter>();
         services.AddSingleton<IConnectionMultiplexer>(_ => ConnectionMultiplexer.Connect(redisConnection));
 
         return services;

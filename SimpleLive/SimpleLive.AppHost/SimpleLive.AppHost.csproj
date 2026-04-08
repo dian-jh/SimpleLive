@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiGateway\ApiGateway.csproj" />
+    <ProjectReference Include="..\InteractionService.WebAPI\InteractionService.WebAPI.csproj" />
     <ProjectReference Include="..\RoomService.WebAPI\RoomService.WebAPI.csproj" />
     <ProjectReference Include="..\src\User\User.API\UserService.API.csproj" />
   </ItemGroup>

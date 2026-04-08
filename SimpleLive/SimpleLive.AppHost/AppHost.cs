@@ -16,4 +16,6 @@ var roomApi = builder.AddProject<Projects.RoomService_WebAPI>("roomservice-webap
                     .WithReference(redis)
                     .WithReference(rabbitMq);
 
+builder.AddProject<Projects.InteractionService_WebAPI>("interactionservice-webapi");
+
 builder.Build().Run();

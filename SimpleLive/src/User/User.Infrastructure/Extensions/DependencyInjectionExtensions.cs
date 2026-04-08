@@ -29,7 +29,7 @@ public static class DependencyInjectionExtensions
                 options.User.RequireUniqueEmail = false;
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 
-                options.Password.RequiredLength = 8;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireDigit = true;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;

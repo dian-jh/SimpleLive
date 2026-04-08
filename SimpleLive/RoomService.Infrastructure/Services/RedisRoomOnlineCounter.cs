@@ -1,45 +1,32 @@
-using Microsoft.Extensions.Options;
-using RoomService.Domain.Services;
-using RoomService.Infrastructure.Options;
+﻿using RoomService.Domain.Services;
 using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace RoomService.Infrastructure.Services;
 
 public sealed class RedisRoomOnlineCounter : IRoomOnlineCounter
 {
     private readonly IConnectionMultiplexer _redis;
-    private readonly IOptions<LiveRoomOptions> _options;
 
-    public RedisRoomOnlineCounter(IConnectionMultiplexer redis, IOptions<LiveRoomOptions> options)
+    // 这里的常量必须和 InteractionService 中保持绝对一致！
+    private const string RoomUsersPrefix = "live:room";
+
+    public RedisRoomOnlineCounter(IConnectionMultiplexer redis)
     {
         _redis = redis;
-        _options = options;
-    }
-
-    public async Task<long> HeartbeatAsync(string roomNumber, string viewerId, CancellationToken cancellationToken = default)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(roomNumber);
-        ArgumentException.ThrowIfNullOrWhiteSpace(viewerId);
-
-        var roomKey = GetOnlineKey(roomNumber);
-        var db = _redis.GetDatabase();
-
-        var nowUnixSeconds = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        var expiredBefore = nowUnixSeconds - _options.Value.ViewerHeartbeatExpireSeconds;
-
-        await db.SortedSetAddAsync(roomKey, viewerId.Trim(), nowUnixSeconds);
-        await db.SortedSetRemoveRangeByScoreAsync(roomKey, double.NegativeInfinity, expiredBefore);
-        return await db.SortedSetLengthAsync(roomKey);
     }
 
     public async Task<long> GetOnlineCountAsync(string roomNumber, CancellationToken cancellationToken = default)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(roomNumber);
 
-        await CleanupExpiredAsync(roomNumber, cancellationToken);
-        var roomKey = GetOnlineKey(roomNumber);
         var db = _redis.GetDatabase();
-        return await db.SortedSetLengthAsync(roomKey);
+        string roomUsersKey = $"{RoomUsersPrefix}:{roomNumber.Trim()}:users";
+
+        // 直接 O(1) 获取 Set 的大小
+        return await db.SetLengthAsync(roomUsersKey);
     }
 
     public async Task<IReadOnlyDictionary<string, long>> GetOnlineCountsAsync(IEnumerable<string> roomNumbers, CancellationToken cancellationToken = default)
@@ -55,49 +42,23 @@ public sealed class RedisRoomOnlineCounter : IRoomOnlineCounter
         }
 
         var db = _redis.GetDatabase();
-        var nowUnixSeconds = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        var expiredBefore = nowUnixSeconds - _options.Value.ViewerHeartbeatExpireSeconds;
-
-        foreach (var roomNumber in roomNumberList)
-        {
-            var key = GetOnlineKey(roomNumber);
-            await db.SortedSetRemoveRangeByScoreAsync(key, double.NegativeInfinity, expiredBefore);
-        }
-
         var result = new Dictionary<string, long>(roomNumberList.Count, StringComparer.Ordinal);
-        foreach (var roomNumber in roomNumberList)
+
+        // 性能优化：使用并发任务 (Task.WhenAll) 批量从 Redis 获取数据，避免 for 循环里串行 await 导致的阻塞
+        var tasks = roomNumberList.Select(async roomNumber =>
         {
-            var count = await db.SortedSetLengthAsync(GetOnlineKey(roomNumber));
-            result[roomNumber] = count;
+            string roomUsersKey = $"{RoomUsersPrefix}:{roomNumber.Trim()}:users";
+            long count = await db.SetLengthAsync(roomUsersKey);
+            return new { RoomNumber = roomNumber, Count = count };
+        });
+
+        var counts = await Task.WhenAll(tasks);
+
+        foreach (var item in counts)
+        {
+            result[item.RoomNumber] = item.Count;
         }
 
         return result;
-    }
-
-    public async Task CleanupExpiredAsync(string roomNumber, CancellationToken cancellationToken = default)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(roomNumber);
-
-        var db = _redis.GetDatabase();
-        var nowUnixSeconds = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
-        var expiredBefore = nowUnixSeconds - _options.Value.ViewerHeartbeatExpireSeconds;
-
-        await db.SortedSetRemoveRangeByScoreAsync(
-            GetOnlineKey(roomNumber),
-            double.NegativeInfinity,
-            expiredBefore);
-    }
-
-    public async Task ClearRoomAsync(string roomNumber, CancellationToken cancellationToken = default)
-    {
-        ArgumentException.ThrowIfNullOrWhiteSpace(roomNumber);
-        var db = _redis.GetDatabase();
-        await db.KeyDeleteAsync(GetOnlineKey(roomNumber));
-    }
-
-    private string GetOnlineKey(string roomNumber)
-    {
-        var prefix = _options.Value.OnlineZSetKeyPrefix;
-        return $"{prefix}:{roomNumber.Trim()}";
     }
 }
