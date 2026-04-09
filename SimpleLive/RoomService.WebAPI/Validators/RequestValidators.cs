@@ -15,14 +15,6 @@ public sealed class CreateLiveRoomRequestValidator : AbstractValidator<CreateLiv
     }
 }
 
-public sealed class HeartbeatRequestValidator : AbstractValidator<HeartbeatRequest>
-{
-    public HeartbeatRequestValidator()
-    {
-        RuleFor(x => x.ViewerId).NotEmpty().MaximumLength(128);
-    }
-}
-
 public sealed class SrsWebhookRequestValidator : AbstractValidator<SrsWebhookRequest>
 {
     public SrsWebhookRequestValidator()

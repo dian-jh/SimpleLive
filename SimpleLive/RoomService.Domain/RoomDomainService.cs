@@ -14,11 +14,13 @@ public sealed class RoomDomainService
     public RoomDomainService(
         IRoomRepository repository,
         IRoomNumberGenerator roomNumberGenerator,
-        IStreamKeyTokenService streamKeyTokenService)
+        IStreamKeyTokenService streamKeyTokenService,
+        IRoomOnlineCounter roomOnlineCounter)
     {
         _repository = repository;
         _roomNumberGenerator = roomNumberGenerator;
         _streamKeyTokenService = streamKeyTokenService;
+        _roomOnlineCounter = roomOnlineCounter;
     }
 
     public async Task<(bool Success, LiveRoom? Room, string ErrorMessage)> PrepareLiveStreamAsync(

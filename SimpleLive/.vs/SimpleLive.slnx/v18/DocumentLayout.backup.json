@@ -3,16 +3,28 @@
   "WorkspaceRootPath": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B6268400-D218-4EE1-B29A-CBB6E60BEFFF}|InteractionService.Domain\\InteractionService.Domain.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\interactionservice.domain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6268400-D218-4EE1-B29A-CBB6E60BEFFF}|InteractionService.Domain\\InteractionService.Domain.csproj|solutionrelative:interactionservice.domain\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A0210EFD-F344-466E-9710-0BC35BE36428}|RoomService.Domain\\RoomService.Domain.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\roomservice.domain\\roomdomainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A0210EFD-F344-466E-9710-0BC35BE36428}|RoomService.Domain\\RoomService.Domain.csproj|solutionrelative:roomservice.domain\\roomdomainservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B898AF0-A85C-99F2-0834-12753A86006E}|RoomService.WebAPI\\RoomService.WebAPI.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\roomservice.webapi\\hubs\\liveroomhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B898AF0-A85C-99F2-0834-12753A86006E}|RoomService.WebAPI\\RoomService.WebAPI.csproj|solutionrelative:roomservice.webapi\\hubs\\liveroomhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B898AF0-A85C-99F2-0834-12753A86006E}|RoomService.WebAPI\\RoomService.WebAPI.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\roomservice.webapi\\controllers\\liveroomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B898AF0-A85C-99F2-0834-12753A86006E}|RoomService.WebAPI\\RoomService.WebAPI.csproj|solutionrelative:roomservice.webapi\\controllers\\liveroomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5DB897B-82AA-41D6-A736-03B4CE390F67}|RoomService.Infrastructure\\RoomService.Infrastructure.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\roomservice.infrastructure\\services\\redisroomconnectiontracker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5DB897B-82AA-41D6-A736-03B4CE390F67}|RoomService.Infrastructure\\RoomService.Infrastructure.csproj|solutionrelative:roomservice.infrastructure\\services\\redisroomconnectiontracker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0B898AF0-A85C-99F2-0834-12753A86006E}|RoomService.WebAPI\\RoomService.WebAPI.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\roomservice.webapi\\controllers\\srswebhookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B898AF0-A85C-99F2-0834-12753A86006E}|RoomService.WebAPI\\RoomService.WebAPI.csproj|solutionrelative:roomservice.webapi\\controllers\\srswebhookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3CD79100-9FC1-9167-66FC-3A18F67AA450}|InteractionService.WebAPI\\InteractionService.WebAPI.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\interactionservice.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3CD79100-9FC1-9167-66FC-3A18F67AA450}|InteractionService.WebAPI\\InteractionService.WebAPI.csproj|solutionrelative:interactionservice.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D65B993-9171-460F-05DB-7E647F39ED66}|src\\User\\User.API\\UserService.API.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\src\\user\\user.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D65B993-9171-460F-05DB-7E647F39ED66}|src\\User\\User.API\\UserService.API.csproj|solutionrelative:src\\user\\user.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B898AF0-A85C-99F2-0834-12753A86006E}|RoomService.WebAPI\\RoomService.WebAPI.csproj|e:\\csharp\\vs2026\\code\\simplelive\\simplelive\\roomservice.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B898AF0-A85C-99F2-0834-12753A86006E}|RoomService.WebAPI\\RoomService.WebAPI.csproj|solutionrelative:roomservice.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 1256,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\InteractionService.Domain\\Program.cs",
-              "RelativeDocumentMoniker": "InteractionService.Domain\\Program.cs",
-              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\InteractionService.Domain\\Program.cs",
-              "RelativeToolTip": "InteractionService.Domain\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "SrsWebhookController.cs",
+              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.WebAPI\\Controllers\\SrsWebhookController.cs",
+              "RelativeDocumentMoniker": "RoomService.WebAPI\\Controllers\\SrsWebhookController.cs",
+              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.WebAPI\\Controllers\\SrsWebhookController.cs",
+              "RelativeToolTip": "RoomService.WebAPI\\Controllers\\SrsWebhookController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T06:52:13.603Z",
+              "WhenOpened": "2026-04-08T14:32:01.766Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RedisRoomConnectionTracker.cs",
-              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.Infrastructure\\Services\\RedisRoomConnectionTracker.cs",
-              "RelativeDocumentMoniker": "RoomService.Infrastructure\\Services\\RedisRoomConnectionTracker.cs",
-              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.Infrastructure\\Services\\RedisRoomConnectionTracker.cs",
-              "RelativeToolTip": "RoomService.Infrastructure\\Services\\RedisRoomConnectionTracker.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "RoomDomainService.cs",
+              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.Domain\\RoomDomainService.cs",
+              "RelativeDocumentMoniker": "RoomService.Domain\\RoomDomainService.cs",
+              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.Domain\\RoomDomainService.cs",
+              "RelativeToolTip": "RoomService.Domain\\RoomDomainService.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAmwDgAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T05:54:28.099Z",
+              "WhenOpened": "2026-04-08T14:32:01.784Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "LiveRoomHub.cs",
-              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.WebAPI\\Hubs\\LiveRoomHub.cs",
-              "RelativeDocumentMoniker": "RoomService.WebAPI\\Hubs\\LiveRoomHub.cs",
-              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.WebAPI\\Hubs\\LiveRoomHub.cs",
-              "RelativeToolTip": "RoomService.WebAPI\\Hubs\\LiveRoomHub.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAARAAAAAAAAAA==",
+              "Title": "LiveRoomsController.cs",
+              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.WebAPI\\Controllers\\LiveRoomsController.cs",
+              "RelativeDocumentMoniker": "RoomService.WebAPI\\Controllers\\LiveRoomsController.cs",
+              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.WebAPI\\Controllers\\LiveRoomsController.cs",
+              "RelativeToolTip": "RoomService.WebAPI\\Controllers\\LiveRoomsController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAABAwCIAAABXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-08T05:12:57.481Z",
+              "WhenOpened": "2026-04-08T15:00:10.339Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\InteractionService.WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "InteractionService.WebAPI\\Program.cs",
+              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\InteractionService.WebAPI\\Program.cs",
+              "RelativeToolTip": "InteractionService.WebAPI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T14:31:37.411Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\src\\User\\User.API\\Program.cs",
+              "RelativeDocumentMoniker": "src\\User\\User.API\\Program.cs",
+              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\src\\User\\User.API\\Program.cs",
+              "RelativeToolTip": "src\\User\\User.API\\Program.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T14:30:47.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "RoomService.WebAPI\\Program.cs",
+              "ToolTip": "E:\\CSharp\\vs2026\\code\\SimpleLive\\SimpleLive\\RoomService.WebAPI\\Program.cs",
+              "RelativeToolTip": "RoomService.WebAPI\\Program.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAQwD8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-08T14:30:42.202Z",
               "EditorCaption": ""
             }
           ]

@@ -226,3 +226,4 @@ E:\CSharp\vs2026\code\SimpleLive\SimpleLive\SimpleLive.AppHost\obj\Debug\net10.0
 E:\CSharp\vs2026\code\SimpleLive\SimpleLive\SimpleLive.AppHost\obj\Debug\net10.0\SimpleLive.AppHost.pdb
 E:\CSharp\vs2026\code\SimpleLive\SimpleLive\SimpleLive.AppHost\obj\Debug\net10.0\SimpleLive.AppHost.genruntimeconfig.cache
 E:\CSharp\vs2026\code\SimpleLive\SimpleLive\SimpleLive.AppHost\obj\Debug\net10.0\ref\SimpleLive.AppHost.dll
+E:\CSharp\vs2026\code\SimpleLive\SimpleLive\SimpleLive.AppHost\obj\Debug\net10.0\Aspire\references\InteractionService_WebAPI.ProjectMetadata.g.cs

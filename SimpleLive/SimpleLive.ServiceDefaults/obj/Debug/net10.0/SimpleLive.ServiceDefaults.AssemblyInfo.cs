@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SimpleLive.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e0731b5e4b0e27a021ac0a5f5ddc8b825a7da07")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1cb8c7f69a5b608f86b8010ba3ea74b4932330d")]
 [assembly: System.Reflection.AssemblyProductAttribute("SimpleLive.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SimpleLive.ServiceDefaults")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

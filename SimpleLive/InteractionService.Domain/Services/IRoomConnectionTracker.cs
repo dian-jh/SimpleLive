@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace InteractionService.Domain.Services;
+﻿namespace InteractionService.Domain.Services;
 
 /// <summary>
 /// 直播间长连接与在线人数追踪器 (替代原有的心跳 Counter)

@@ -19,7 +19,6 @@ public sealed class LiveRoomOfflineDomainEventHandler : INotificationHandler<Liv
 
     public async Task Handle(LiveRoomOfflineDomainEvent notification, CancellationToken cancellationToken)
     {
-        await _roomOnlineCounter.ClearRoomAsync(notification.RoomNumber, cancellationToken);
         _logger.LogInformation(
             "LiveRoom offline cleanup done. RoomId={RoomId}, RoomNumber={RoomNumber}",
             notification.RoomId,

@@ -21,7 +21,7 @@ export function Navbar() {
           </nav>
         </div>
 
-        {/* Center: Search */}
+        {/* Center: Search */}  
         <div className="flex-1 max-w-[480px] hidden sm:block">
           <div className="relative group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">

@@ -10,7 +10,6 @@ using System.Security.Claims;
 
 namespace RoomService.WebAPI.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("api/liverooms")]
 public sealed class LiveRoomsController : ControllerBase
@@ -25,6 +24,7 @@ public sealed class LiveRoomsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Create([FromBody] CreateLiveRoomRequest request, CancellationToken cancellationToken)
     {
         var hostIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -84,6 +84,7 @@ public sealed class LiveRoomsController : ControllerBase
     }
 
     [HttpGet("{roomNumber}")]
+    [Authorize]
     public async Task<IActionResult> GetDetail([FromRoute] string roomNumber, CancellationToken cancellationToken)
     {
         var (success, detail, errorMessage) = await _domainService.GetLiveRoomDetailAsync(roomNumber, cancellationToken);

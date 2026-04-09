@@ -168,21 +168,80 @@ npm run build 通过（生产构建成功）
    - 如果行数增加了，必须向我解释增量去哪了（例如：是因为增加了必需的 TypeScript 类型约束）。
 ```
 
+
+
+直播模块
+
 ```
-首先Read https://chatgpt.com/share/69d50f73-99bc-83e8-a068-46affb1eb7b7里面的内容，然后查看我上传的文件，对我的直播项目有一个整体的了解。这里我的意图是让你给我分析一下我的Room房间模块。我感觉之前ai给我写的业务逻辑有点问题，开播关播(OnPublish,OnUnpublish)已经有了，但是用户进房间出房间我感觉没有，我这里的controller只有创建房间，获取一些信息，根本没有进房间出房间的api，而且我认为GetDetail可以直接放到进房间的api里面，而且使用的Heartbeat进行直播间人数确认。我觉得这里使用SinalR是最合适的。并且要使用Redis，因为在开发阶段的时候，可能只有一个实例，但是后面可能会出现多实例的问题，对于多实例的问题你也给我解答一下怎么解决
+# 角色与背景设定
+你是一位拥有十年经验的前端架构师，精通 React 18、TypeScript、Vite、Tailwind CSS、Zustand 和 Framer Motion。
+我现在是一名拥有 C# .NET 后端经验但前端刚起步的 CS 专业学生。请严格按照企业级标准为我生成代码，并以教学的态度在关键代码处写下中文注释，解释“为什么这么写”（尤其是对比后端架构思维）。
 
+# 核心架构规范 (必须严格遵守，违者重写)
+1. **单文件行数限制**：任何 `.tsx` 或 `.ts` 文件绝对不能超过 300 行。
+2. **职责极度分离**：UI 纯展示、逻辑抽离到 Hooks、状态存入 Store、请求归拢到 API。
+3. **领域驱动目录**：按照功能模块划分目录结构，当前领域为 `Live`。
+4. **动效优先**：页面进入、列表加载、弹幕弹出必须保留高级感，使用 `framer-motion` 进行平滑过渡。
 
+# 极端代码精简原则 (Extreme DRY & Minification)
+1. **绝对不留死代码**：重构或新建时，严禁留下被注释掉的大段逻辑。
+2. **数据驱动 UI**：遇到 3 个以上高度相似的 UI 结构（如直播间列表、多条弹幕），**严禁复制粘贴 JSX**。必须使用 `Array.map()` 循环渲染，并加上正确的 `key`。
+3. **极致抽象**：高度复用的 UI（如直播卡片、统一按钮）必须提取为独立的小组件。
+4. **强制自检报告**：输出完代码后，必须汇报你提取了哪些组件、精简了哪些结构。
 
-但是这里我又有一些忧虑在里面。
+# 任务目标
+根据下方提供的真实的 C# 后端接口与 SignalR 契约，为我的“简播”项目生成【直播大厅与直播间模块】的前端代码。
+注意：项目中已有全局 axios 实例 `src/api/request.ts` 和状态管理 `src/store/User/useUserStore.ts`。
 
-首先，就是系统架构方面的问题，SignalR的代码要放到哪里呢？Domain、Infrastructure、API层？如何适配我的系统架构呢，如何使用SignalR呢，我的想法是，例如用户进房间：controller->DomainService->实体方法->发布领域事件->Handler里面进行调用IxxxHub来调用Hub等等，如加入这个用户到一个Group中，什么记录当前房间数+1等等。
+# 后端接口契约 (C# 真实约束)
 
+**1. HTTP API 契约**
+基础路径: `/api/liverooms`
+- 获取直播大厅列表: `GET /api/liverooms/home?pageIndex=1&pageSize=20`
+  - 返回: `Array<{ Id, RoomNumber, CategoryId, HostUserName, HostAvatarUrl, Title, CoverImageUrl, Notice, Status, OnlineCount }>`
+- 获取直播间详情: `GET /api/liverooms/{roomNumber}`
+  - 返回: `{ Id, RoomNumber, CategoryId, HostId, HostUserName, HostAvatarUrl, Title, CoverImageUrl, Notice, Status, OnlineCount, PlayUrl }` (注意 PlayUrl 是 .flv 格式)
 
+**2. SignalR 契约**
+- Hub 路径: `/hubs/liveroom`
+- 鉴权: 必须在 `withUrl` 配置中通过 `accessTokenFactory` 传入本地 Zustand 中的 JWT Token。
+- 前端需调用的服务器方法: `JoinRoom(string roomNumber)`, `LeaveRoom()`
+- 前端需监听的服务器事件: `"OnViewerCountChanged"` (接收参数为 `int onlineCount`)
 
-但是我还有一个Interaction模块，我感觉我PRD的时候进行模块划分的时候出现了问题，因为进行弹幕发送接收的时候，肯定也是使用SignalR的，这时会有多个房间，要根据房间号进行群发，只有在进入房间的时候才能创建长连接，我感觉这也有问题，但是我目前都写了一半了，我不知道如何修改了。
+# 需要生成的文件及要求 (请依次输出)
 
+1.【API层】 `src/api/Live/roomApi.ts`
+- 引入 `@/api/request`。严格定义 TS Interface 对应上述 C# DTO。导出获取列表和详情的异步函数。
 
+2.【UI原子组件层】 `src/features/Live/components/StreamCard.tsx`
+- 纯 UI 组件，用于首页瀑布流。包含封面图、标题、主播名、当前热度(在线人数)。
+- 使用 `framer-motion` 实现鼠标悬浮时卡片轻微上浮的物理动效。
 
-你先给我完完全全的详细分析上面的问题，后面我可能还有问题，但是我暂时想不起来了，你慢慢给我思考，我要如何解决这些问题，或者说Interaction模块融合到Room模块中呢，我有点迷茫了，毕竟我已经写了一半了，这样突然修改架构会出现大量的问题，我不敢随意修改
+3.【Hooks层】 `src/features/Live/hooks/useRoomList.ts`
+- 封装获取大厅列表逻辑，管理 `rooms` 和 `isLoading` 状态。
+
+4.【Hooks层】 `src/features/Live/hooks/useLiveRoom.ts` (极其重要)
+- 接收 `roomNumber` 参数。
+- **职责一：** 调用 API 获取房间详情信息（包括 FLV 播放地址）。
+- **职责二：** 使用 `@microsoft/signalr` 建立长连接。使用 `accessTokenFactory` 携带 Token。
+- **职责三：** 连接成功后调用 `JoinRoom`，并监听 `OnViewerCountChanged` 更新内部的 `onlineCount` 状态。
+- **灾难防范：** 必须在 `useEffect` 的 cleanup 函数（`return () => {...}`）中调用 `LeaveRoom` 并断开 SignalR 连接，防止 React 重新渲染导致连接泄露。
+
+5.【UI业务组件层】 `src/features/Live/components/VideoPlayer.tsx` & `ChatPanel.tsx`
+- `VideoPlayer`: 接收 `PlayUrl`。目前先用深色背景居中显示“FLV流播放占位”进行模拟。
+- `ChatPanel`: 接收 `onlineCount` 显示在线人数。下方放置弹幕聊天流和发送输入框（样式要求现代、极简）。
+
+6.【页面容器层】 `src/pages/Live/HomePage.tsx`
+- 使用 Tailwind Grid 布局（如 `grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6`）循环渲染 `StreamCard`。
+- 加入整体页面的淡入动效。
+
+7.【页面容器层】 `src/pages/Live/LiveRoomPage.tsx`
+- 通过 `useParams` 获取 URL 中的 `roomNumber`，调用 `useLiveRoom`。
+- 采用左右分栏的现代直播间布局（左侧视频区占主要空间，右侧弹幕面板固定宽度 320px 左右）。
+
+# 教学附加要求
+请在代码注释中，向我解释：
+1. 为什么 SignalR 的 Token 要放在 `accessTokenFactory` 里传，而不是像 Axios 一样放在全局 Header 里？这和 WebSocket 协议有什么关系？
+2. `useLiveRoom.ts` 里的 cleanup 函数是如何保证我们在切换路由时，后端不会认为我们还在房间里挂机刷在线人数的？
 ```
 

@@ -16,6 +16,16 @@ var roomApi = builder.AddProject<Projects.RoomService_WebAPI>("roomservice-webap
                     .WithReference(redis)
                     .WithReference(rabbitMq);
 
-builder.AddProject<Projects.InteractionService_WebAPI>("interactionservice-webapi");
+var interactionApi = builder.AddProject<Projects.InteractionService_WebAPI>("interactionservice-webapi")
+                    .WithReference(redis);
+
+var gateway = builder.AddProject<Projects.ApiGateway>("apigateway")  // 项目名称改成你实际的
+                     .WithReference(userApi)
+                     .WithReference(roomApi)
+                     .WithReference(interactionApi)
+                     .WaitFor(userApi)      // 可选：等待后端启动
+                     .WaitFor(roomApi)
+                     .WaitFor(interactionApi)
+                     .WithExternalHttpEndpoints();  // 重要：暴露给外部访问
 
 builder.Build().Run();
