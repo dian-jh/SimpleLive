@@ -1,70 +1,81 @@
-import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { Sparkles, TrendingUp, Gamepad2, Mic, MonitorPlay, Music, Code, Compass } from 'lucide-react'
 import { Navbar } from '@/components/layout/Navbar'
 import { StreamCard } from '@/features/Live/components/StreamCard'
 import { useRoomList } from '@/features/Live/hooks/useRoomList'
+import { useUserStore } from '@/store/User/useUserStore'
 
-const CATEGORY_OPTIONS = ['主机游戏', '热门手游', '科技编程', '音乐现场', '户外生活']
-const SKELETON_KEYS = Array.from({ length: 8 }, (_, index) => `skeleton-${index}`)
+const CATEGORIES = [
+  { id: 'all', label: '推荐', icon: Sparkles },
+  { id: 'hot', label: '热门', icon: TrendingUp },
+  { id: 'gaming', label: '游戏', icon: Gamepad2 },
+  { id: 'chat', label: '颜值', icon: Mic },
+  { id: 'tech', label: '科技', icon: Code },
+  { id: 'music', label: "音乐", icon: Music },
+  { id: 'outdoor', label: '户外', icon: Compass },
+  { id: 'pc', label: '端游', icon: MonitorPlay },
+]
 
-interface StartLiveRouteState {
-  source: 'home-start'
-  title: string
-  category: string
-}
+const SKELETON_KEYS = Array.from({ length: 10 }, (_, index) => `skeleton-${index}`)
 
 const HomePage = () => {
   const navigate = useNavigate()
+  const token = useUserStore((state) => state.token)
+
   const { rooms, isLoading, error } = useRoomList({
     pageIndex: 1,
     pageSize: 20,
   })
 
-  const [title, setTitle] = useState('新主播第一次直播很紧张！！！')
-  const [category, setCategory] = useState(CATEGORY_OPTIONS[0])
-
-  const canStart = title.trim().length > 0
-
-  const fallbackCoverUrl = useMemo(
-    () => 'https://images.unsplash.com/photo-1598550487031-0898b4852123?auto=format&fit=crop&w=1200&q=80',
-    [],
-  )
-
   const handleGoStart = () => {
-    if (!canStart) {
+    if (!token) {
+      alert('您目前暂未登录，请先登录后再开播！')
+      navigate('/auth')
       return
     }
-
-    // 教学点：通过 Router state 传递“开播草稿”，数据只在前端路由内存里流动，不暴露在 URL。
-    // 这和后端里把临时对象放在服务层上下文，而不是拼到公开路由参数，是同一个“最小暴露面”思路。
-    const startState: StartLiveRouteState = {
-      source: 'home-start',
-      title: title.trim(),
-      category,
-    }
-
-    navigate('/live/start', { state: startState })
+    navigate('/live/start', {
+      state: { source: 'home-start', title: '新主播第一次直播很紧张！！！', category: '主机游戏' }
+    })
   }
 
   return (
     <div className="min-h-screen bg-[#f5f7fb]">
       <Navbar onStartLive={handleGoStart} />
 
-      <motion.main
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35 }}
-        className="mx-auto w-full max-w-[1600px] px-6 pb-10 pt-6"
-      >
-
+      {/* 💡 核心修复：pt-24 给 Navbar 留出空间 */}
+      <main className="mx-auto w-full max-w-[1600px] px-6 pb-12 pt-24">
         {error ? (
           <div className="mb-5 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-600">
             {error}
           </div>
         ) : null}
 
-        <section className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-5">
+        {/* 分类栏 (参照原型) */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8 flex items-center gap-3 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden"
+        >
+          {CATEGORIES.map((cat, idx) => (
+            <button
+              key={cat.id}
+              className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-[14px] font-medium transition-all duration-300 whitespace-nowrap
+                ${idx === 0
+                  ? "bg-slate-900 text-white shadow-md shadow-slate-900/20"
+                  : "border border-slate-200/60 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                }
+              `}
+            >
+              <cat.icon className="h-4 w-4" />
+              {cat.label}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* 瀑布流网格 (参照原型间距) */}
+        <section className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {isLoading
             ? SKELETON_KEYS.map((key) => (
               <div key={key} className="overflow-hidden rounded-3xl border border-slate-200 bg-white">
@@ -77,7 +88,7 @@ const HomePage = () => {
             ))
             : rooms.map((room, index) => (
               <motion.div
-                key={room.RoomNumber}
+                key={room.roomNumber}
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.04 }}
@@ -86,7 +97,7 @@ const HomePage = () => {
               </motion.div>
             ))}
         </section>
-      </motion.main>
+      </main>
     </div>
   )
 }

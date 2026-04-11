@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import type { LoginRequestDto, RegisterRequestDto } from '@/api/User/authApi'
 import { AuthLayout } from '@/features/User/components/AuthLayout'
 import { LoginForm } from '@/features/User/components/LoginForm'
@@ -7,6 +8,9 @@ import { useAuth } from '@/features/User/hooks/useAuth'
 import { AnimatePresence, motion } from 'framer-motion'
 
 type AuthMode = 'login' | 'register'
+interface AuthRouteState {
+  from?: string
+}
 
 const transition = {
   duration: 0.3,
@@ -14,11 +18,18 @@ const transition = {
 }
 
 const AuthPage = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [mode, setMode] = useState<AuthMode>('login')
   const { isLoading, login, register } = useAuth()
 
   const handleLogin = async (payload: LoginRequestDto) => {
-    await login(payload)
+    const success = await login(payload)
+    if (success) {
+      const routeState = (location.state ?? null) as AuthRouteState | null
+      const backTo = routeState?.from || '/live'
+      navigate(backTo, { replace: true })
+    }
   }
 
   const handleRegister = async (payload: RegisterRequestDto) => {

@@ -20,7 +20,7 @@ export interface LoginRequestDto {
 }
 
 export interface LoginResponseDto {
-  Token: string
+  token: string
 }
 
 export const registerApi = async (

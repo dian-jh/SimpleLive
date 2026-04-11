@@ -1,5 +1,6 @@
 // src/api/request.ts
 import axios from 'axios';
+import { useUserStore } from '@/store/User/useUserStore'
 
 // 创建 axios 实例
 const request = axios.create({
@@ -10,16 +11,17 @@ const request = axios.create({
 // 请求拦截器：每次发请求前，自动把 Token 塞进请求头
 request.interceptors.request.use(
     (config) => {
-        // 从 localStorage 中取出 Zustand 存的 Token
-        const authStore = localStorage.getItem('user-storage');
-        if (authStore) {
-            try {
-                const { state } = JSON.parse(authStore);
-                if (state.token) {
-                    config.headers.Authorization = `Bearer ${state.token}`;
-                }
-            } catch (error) {
-                console.error('解析 Token 失败', error);
+        // 💡 教学点：在非 React 组件（普通 JS/TS 文件）中，直接用 getState() 读取当前内存状态
+        const tokenData = useUserStore.getState().token;
+
+        if (tokenData) {
+            // 兼容对象和字符串的情况
+            const actualToken = typeof tokenData === 'string'
+                ? tokenData
+                : (tokenData as any).accessToken;
+
+            if (actualToken) {
+                config.headers.Authorization = `Bearer ${actualToken}`;
             }
         }
         return config;

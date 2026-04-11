@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { HubConnectionBuilder, HubConnectionState, LogLevel } from '@microsoft/signalr'
 import request from '@/api/request'
-import { getLiveRoomDetailApi, type LiveRoomDetailDto } from '@/api/Live/roomApi'
+import { getLiveRoomDetail, type LiveRoomDetailDto } from '@/api/Live/roomApi'
 import { useUserStore } from '@/store/User/useUserStore'
 
 const parseErrorMessage = (error: unknown): string => {
@@ -34,17 +34,20 @@ export const useLiveRoom = (roomNumber?: string) => {
 
     let isDisposed = false
 
+    // 这里不要把 useEffect 回调直接写成 async。
+    // async effect 会返回 Promise，和 C# 的 async void 一样，调用方难以可靠等待与捕获异常。
     const loadRoomDetail = async () => {
       setIsLoading(true)
       setError(null)
+
       try {
-        const detail = await getLiveRoomDetailApi(roomNumber)
+        const detail = await getLiveRoomDetail(roomNumber)
         if (isDisposed) {
           return
         }
 
         setRoomDetail(detail)
-        setOnlineCount(detail.OnlineCount)
+        setOnlineCount(detail.onlineCount ?? 0)
       } catch (requestError) {
         if (!isDisposed) {
           setError(parseErrorMessage(requestError))
@@ -71,9 +74,22 @@ export const useLiveRoom = (roomNumber?: string) => {
     let isDisposed = false
     const connection = new HubConnectionBuilder()
       .withUrl(buildHubUrl(), {
-        // 教学点：SignalR 的握手走的是 WebSocket/长连接链路，不会经过 axios 请求拦截器。
-        // 所以 token 要放在 accessTokenFactory 中，不能只依赖 axios 全局 Authorization Header。
-        accessTokenFactory: () => useUserStore.getState().token ?? '',
+        // SignalR 的握手是独立连接链路，不会经过 axios 拦截器。
+        // 所以 token 必须放在 accessTokenFactory 中。
+        accessTokenFactory: () => {
+          // 1. 读取当前内存中的 token 状态
+          const tokenData = useUserStore.getState().token;
+
+          if (!tokenData) return '';
+
+          // 2. 兼容对象和字符串的情况（与 axios 拦截器保持绝对一致）
+          const actualToken = typeof tokenData === 'string'
+            ? tokenData
+            : (tokenData as any).accessToken;
+
+          // 3. 返回真实的 JWT 字符串
+          return actualToken ?? '';
+        },
       })
       .withAutomaticReconnect()
       .configureLogging(LogLevel.Warning)
@@ -87,6 +103,7 @@ export const useLiveRoom = (roomNumber?: string) => {
 
     const connect = async () => {
       setIsConnecting(true)
+
       try {
         await connection.start()
         if (isDisposed) {
@@ -113,8 +130,6 @@ export const useLiveRoom = (roomNumber?: string) => {
 
       void (async () => {
         try {
-          // 教学点：这里相当于后端服务里的 finally 资源释放。
-          // 路由切换触发 cleanup 后会先 LeaveRoom，再 stop 连接，避免服务端误判用户还在房间里挂机。
           if (connection.state === HubConnectionState.Connected) {
             await connection.invoke('LeaveRoom')
           }

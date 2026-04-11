@@ -23,39 +23,61 @@ public sealed class LiveRoomsController : ControllerBase
         _options = options;
     }
 
-    [HttpPost]
+    // 接口 1：获取推流信息（对应前端点击“选择OBS开播并下一步”）
+    [HttpPost("prepare")]
     [Authorize]
-    public async Task<IActionResult> Create([FromBody] CreateLiveRoomRequest request, CancellationToken cancellationToken)
+    public async Task<IActionResult> Prepare(CancellationToken cancellationToken)
     {
         var hostIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
         if (string.IsNullOrEmpty(hostIdStr) || !Guid.TryParse(hostIdStr, out Guid hostId))
             return Unauthorized();
+
         var hostName = User.FindFirstValue(ClaimTypes.Name);
         var expiresAt = DateTimeOffset.UtcNow.AddMinutes(Math.Max(1, _options.Value.StreamKeyExpireMinutes));
+
         var (success, room, errorMessage) = await _domainService.PrepareLiveStreamAsync(
-            categoryId: request.CategoryId,
             hostId: hostId,
             hostUserName: hostName ?? "未知用户",
-            hostAvatarUrl: request.HostAvatarUrl,
-            title: request.Title,
-            coverImageUrl: request.CoverImageUrl,
-            notice: request.Notice,
             streamKeyExpiresAtUtc: expiresAt,
             cancellationToken: cancellationToken);
 
         if (!success || room is null)
-        {
             return BadRequest(new { Message = errorMessage });
-        }
 
-        var response = new CreateLiveRoomResponse
+        // 返回房间基础信息，供前端“开播设置页”回显（比如把上一次的标题填入输入框）
+        var response = new
         {
-            Id = room.Id,
             RoomNumber = room.RoomNumber,
-            StreamKey = room.StreamKey,// 把最新生成的推流码给前端
-            Status = room.Status
+            StreamKey = room.StreamKey,
+            Title = room.Title,           // 让前端渲染到输入框
+            CategoryId = room.CategoryId, // 让前端下拉框选中默认分类
+            Notice = room.Notice
         };
+
         return Ok(response);
+    }
+
+    // 接口 2：保存开播设置（对应前端填完表单后，点击“开始直播”）
+    [HttpPost("apply-settings")]
+    [Authorize]
+    public async Task<IActionResult> ApplySettings([FromBody] ApplyLiveSettingsRequest request, CancellationToken cancellationToken)
+    {
+        var hostIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(hostIdStr) || !Guid.TryParse(hostIdStr, out Guid hostId))
+            return Unauthorized();
+
+        var (success, errorMessage) = await _domainService.ApplyLiveSettingsAsync(
+            hostId: hostId,
+            title: request.Title,
+            categoryId: request.CategoryId,
+            notice: request.Notice,
+            coverImageUrl: request.CoverImageUrl,
+            cancellationToken: cancellationToken);
+
+        if (!success)
+            return BadRequest(new { Message = errorMessage });
+
+        return Ok(); // 成功保存，前端可以提示“设置成功，请在 OBS 中开始推流”
     }
 
     [HttpGet("home")]

@@ -14,5 +14,5 @@ public sealed class LiveRoomOptions
     public string OnlineZSetKeyPrefix { get; set; } = "live:room:online";
 
     public string SrsIp { get; set; } = "127.0.0.1";
-    public int SrsHttpFlvPort { get; set; } = 8080;
+    public int SrsHttpFlvPort { get; set; } = 1935;
 }

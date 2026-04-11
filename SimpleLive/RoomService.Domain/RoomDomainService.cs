@@ -23,72 +23,107 @@ public sealed class RoomDomainService
         _roomOnlineCounter = roomOnlineCounter;
     }
 
+    // 方法 1：点击“下一步”时调用。只负责发牌（分配房间、生成推流码）
     public async Task<(bool Success, LiveRoom? Room, string ErrorMessage)> PrepareLiveStreamAsync(
-     int categoryId,
-     Guid hostId,
-     string hostUserName,
-     string? hostAvatarUrl,
-     string title,
-     string? coverImageUrl,
-     string? notice,
-     DateTimeOffset streamKeyExpiresAtUtc,
-     CancellationToken cancellationToken = default)
+    Guid hostId,
+    string hostUserName,
+    DateTimeOffset streamKeyExpiresAtUtc, // 这个参数可以保留，用于生成新码时设置过期时间
+    CancellationToken cancellationToken = default)
     {
-        // 1. 查：该主播是否已经有固定的直播间了？
         var room = await _repository.FindByHostIdAsync(hostId, cancellationToken);
 
         if (room is null)
         {
             // ==========================================
-            // 场景 A：该主播【首次开播】，创建全新的专属房间
+            // 场景 A：新主播首次开播，分配房间并生成推流码
             // ==========================================
             var roomNumber = await _roomNumberGenerator.GenerateNextAsync(cancellationToken);
 
-            // 生成动态 AES 推流码
+            // 生成全新的推流码
             var streamKeyPayload = new StreamKeyPayload(roomNumber, hostId, streamKeyExpiresAtUtc);
             var streamKey = _streamKeyTokenService.Encrypt(streamKeyPayload);
 
-            // 初始化实体
+            string defaultTitle = $"{hostUserName}的直播间";
+
             room = new LiveRoom(
                 id: Guid.NewGuid(),
                 roomNumber: roomNumber,
-                categoryId: categoryId,
+                categoryId: 1,
                 hostId: hostId,
                 hostUserName: hostUserName,
-                hostAvatarUrl: hostAvatarUrl,
-                title: title,
-                coverImageUrl: coverImageUrl,
+                hostAvatarUrl: null,
+                title: defaultTitle,
+                coverImageUrl: null,
                 streamKey: streamKey,
-                notice: notice);
+                notice: null);
 
-            room.SetPreparing(); // 明确声明状态切换为“准备中”
-
-            _repository.Add(room); // 追踪新增
+            room.SetPreparing();
+            _repository.Add(room);
         }
         else
         {
             // ==========================================
-            // 场景 B：老主播【日常开播】，复用房间号，刷新推流码
+            // 场景 B：老主播进入开播设置页
             // ==========================================
 
-            // 重新生成新的动态 AES 推流码（防盗播核心）
-            var streamKeyPayload = new StreamKeyPayload(room.RoomNumber, hostId, streamKeyExpiresAtUtc);
-            var streamKey = _streamKeyTokenService.Encrypt(streamKeyPayload);
+            // 1. 如果正在直播中，绝对不能刷新推流码！直接放行。
+            if (room.Status == LiveRoomStatus.Live)
+            {
+                // 什么都不做，保持现有状态，直接跳到最后的 Save
+            }
+            else
+            {
+                // 尝试解密现在的推流码，看看有没有过期
+                bool isValid = _streamKeyTokenService.TryDecrypt(room.StreamKey, out var payload, out var errorMessage);
 
-            // 充血模型：更新这次开播填写的新标题、分区、公告等
-            room.UpdateLiveInfo(title, categoryId, notice, coverImageUrl);
+                // 只有在两种情况下才生成新码：
+                // 1. 旧码无法解密（isValid 为 false，通常是因为数据被破坏、篡改或格式错误）
+                // 2. 旧码已经过了有效期
+                if (!isValid || payload == null || payload.ExpiresAtUtc <= DateTimeOffset.UtcNow)
+                {
+                    // 生成新的动态 AES 推流码
+                    var newStreamKeyPayload = new StreamKeyPayload(room.RoomNumber, hostId, streamKeyExpiresAtUtc);
+                    var newStreamKey = _streamKeyTokenService.Encrypt(newStreamKeyPayload);
 
-            // 充血模型：覆盖新推流码，并将状态切回“准备中”
-            room.RefreshStreamKey(streamKey);
-            room.SetPreparing();
+                    room.RefreshStreamKey(newStreamKey);
+                }
+                else
+                {
+                    // 没过期，继续复用旧码，但要把状态切回 Preparing（应对从 Offline 进来的情况）
+                    room.SetPreparing();
+                }
 
-            _repository.Update(room); // 追踪修改
+                _repository.Update(room);
+            }
         }
 
-        // 2. 统一保存：不管是新增还是修改，都在这里一次性提交数据库
+        await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+        return (true, room, string.Empty);
+    }
+
+    // 方法 2：点击“开始直播”时调用。只负责保存直播间的信息设置
+    public async Task<(bool Success, string ErrorMessage)> ApplyLiveSettingsAsync(
+        Guid hostId,
+        string title,
+        int categoryId,
+        string? notice,
+        string? coverImageUrl,
+        CancellationToken cancellationToken = default)
+    {
+        var room = await _repository.FindByHostIdAsync(hostId, cancellationToken);
+
+        if (room is null)
+        {
+            return (false, "请先获取直播推流信息");
+        }
+
+        // 调用你实体中已经存在的充血模型方法
+        room.UpdateRoomMeta(title, coverImageUrl, notice, categoryId);
+
+        _repository.Update(room);
         await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
-        return (true, room, string.Empty);
+        return (true, string.Empty);
     }
 
     public async Task<(bool Success, string ErrorMessage)> HandleOnPublishAsync(

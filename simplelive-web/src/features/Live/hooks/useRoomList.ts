@@ -1,8 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import {
-  getLiveRoomHomeApi,
-  type LiveRoomSummaryDto,
-} from '@/api/Live/roomApi'
+import { getLiveRooms, type LiveRoomSummaryDto } from '@/api/Live/roomApi'
 
 interface UseRoomListOptions {
   pageIndex?: number
@@ -28,21 +25,25 @@ export const useRoomList = (options: UseRoomListOptions = {}) => {
   const loadRooms = useCallback(async () => {
     setIsLoading(true)
     setError(null)
+
     try {
-      const response = await getLiveRoomHomeApi({
-        pageIndex,
-        pageSize,
-      })
+      const response = await getLiveRooms({ pageIndex, pageSize })
       setRooms(response)
-    } catch (error) {
-      setError(parseErrorMessage(error))
+    } catch (requestError) {
+      setError(parseErrorMessage(requestError))
     } finally {
       setIsLoading(false)
     }
   }, [pageIndex, pageSize])
 
   useEffect(() => {
-    void loadRooms()
+    // 不能把 useEffect 回调直接写成 async：
+    // async effect 会返回 Promise，和 C# 里的 async void 一样，异常不容易被生命周期正确感知。
+    const loadRoomsInEffect = async () => {
+      await loadRooms()
+    }
+
+    void loadRoomsInEffect()
   }, [loadRooms])
 
   return {

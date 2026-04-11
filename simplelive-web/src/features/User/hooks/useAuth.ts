@@ -30,7 +30,7 @@ export const useAuth = () => {
     setIsLoading(true)
     try {
       const data = await loginApi(payload)
-      setToken(data.Token)
+      setToken(data.token)
       alert('登录成功')
       return true
     } catch (error) {

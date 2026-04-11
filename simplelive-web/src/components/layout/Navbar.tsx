@@ -1,16 +1,58 @@
-import { Search, Plus, Heart, Clock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { Search, Plus, Heart, Clock, User } from 'lucide-react'
+import { Link, useLocation } from 'react-router-dom'
+import { getMyProfileApi } from '@/api/User/profileApi'
+import { useUserStore } from '@/store/User/useUserStore'
 
 interface NavbarProps {
-  onStartLive?: () => void;
+  onStartLive?: () => void
 }
 
+const DEFAULT_AVATAR_URL =
+  'https://images.unsplash.com/photo-1643816831186-b2427a8f9f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhc2lhbiUyMHdvbWFuJTIwc21pbGluZyUyMHBvcnRyYWl0fGVufDF8fHx8MTc3NDQ5MjE0NXww&ixlib=rb-4.1.0&q=80&w=200'
+
 export const Navbar = ({ onStartLive }: NavbarProps) => {
+  const location = useLocation()
+  const token = useUserStore((state) => state.token)
+  const [profileAvatarUrl, setProfileAvatarUrl] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!token) {
+      return
+    }
+
+    let isDisposed = false
+
+    const loadProfile = async () => {
+      try {
+        const profile = await getMyProfileApi()
+        if (isDisposed) {
+          return
+        }
+
+        setProfileAvatarUrl(profile.avatarUrl?.trim() || null)
+      } catch (error) {
+        console.error('加载用户头像失败', error)
+        if (!isDisposed) {
+          setProfileAvatarUrl(null)
+        }
+      }
+    }
+
+    void loadProfile()
+
+    return () => {
+      isDisposed = true
+    }
+  }, [token])
+
+  const avatarLinkTo = token ? '/profile' : '/auth'
+  const avatarLinkState = token ? undefined : { from: location.pathname }
+  const avatarUrl = token ? profileAvatarUrl || DEFAULT_AVATAR_URL : DEFAULT_AVATAR_URL
+
   return (
     <header className="fixed top-0 inset-x-0 h-16 bg-white/80 backdrop-blur-xl border-b border-slate-100/60 z-50 transition-all duration-300">
       <div className="max-w-[1600px] mx-auto h-full px-6 flex items-center justify-between gap-8">
-
-        {/* ================= 左侧：Logo 与 导航 ================= */}
         <div className="flex items-center gap-10">
           <Link to="/" className="flex items-center gap-2.5 group">
             <div className="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-lg shadow-sm group-hover:scale-105 transition-transform duration-300">
@@ -30,7 +72,6 @@ export const Navbar = ({ onStartLive }: NavbarProps) => {
           </nav>
         </div>
 
-        {/* ================= 中间：搜索框 ================= */}
         <div className="flex-1 max-w-[480px] hidden sm:block">
           <div className="relative group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -44,9 +85,7 @@ export const Navbar = ({ onStartLive }: NavbarProps) => {
           </div>
         </div>
 
-        {/* ================= 右侧：操作区与个人中心 ================= */}
         <div className="flex items-center gap-5">
-          {/* 核心改动：把原型的 Link 换成了 button，并接入 onStartLive 回调 */}
           <button
             type="button"
             onClick={onStartLive}
@@ -56,7 +95,6 @@ export const Navbar = ({ onStartLive }: NavbarProps) => {
             <span>我要开播</span>
           </button>
 
-          {/* 分割线 */}
           <div className="h-5 w-px bg-slate-200 hidden lg:block mx-1"></div>
 
           <Link to="/profile" className="flex flex-col items-center gap-1 text-slate-500 hover:text-slate-900 transition-colors group">
@@ -69,12 +107,29 @@ export const Navbar = ({ onStartLive }: NavbarProps) => {
             <span className="text-[11px] font-medium hidden md:block mt-0.5">历史</span>
           </Link>
 
-          <Link to="/profile" className="ml-3 w-[38px] h-[38px] rounded-full overflow-hidden border-2 border-transparent hover:border-slate-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 hover:shadow-md">
-            <img src="https://images.unsplash.com/photo-1643816831186-b2427a8f9f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhc2lhbiUyMHdvbWFuJTIwc21pbGluZyUyMHBvcnRyYWl0fGVufDF8fHx8MTc3NDQ5MjE0NXww&ixlib=rb-4.1.0&q=80&w=200" alt="User avatar" className="w-full h-full object-cover" />
-          </Link>
+          {/* ================= 头像渲染逻辑 ================= */}
+          {token ? (
+            // 已登录：显示用户真实头像
+            <Link
+              to={avatarLinkTo}
+              state={avatarLinkState}
+              className="ml-3 w-[38px] h-[38px] rounded-full overflow-hidden border-2 border-transparent hover:border-slate-200 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 hover:shadow-md"
+            >
+              <img src={avatarUrl == null ? DEFAULT_AVATAR_URL : avatarUrl} alt="User avatar" className="w-full h-full object-cover" />
+            </Link>
+          ) : (
+            // 未登录：显示一个代表游客的灰色 User 图标
+            <Link
+              to={avatarLinkTo}
+              state={avatarLinkState}
+              className="ml-3 w-[38px] h-[38px] flex items-center justify-center rounded-full bg-slate-100 text-slate-400 border-2 border-transparent hover:border-slate-200 hover:text-slate-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
+              title="点击登录"
+            >
+              <User className="w-5 h-5" />
+            </Link>
+          )}
         </div>
-
       </div>
     </header>
-  );
-};
+  )
+}

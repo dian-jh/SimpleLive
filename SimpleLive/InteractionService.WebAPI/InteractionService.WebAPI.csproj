@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\InteractionService.Infrastructure\InteractionService.Infrastructure.csproj" />
     <ProjectReference Include="..\SimpleLive.ServiceDefaults\SimpleLive.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\src\Commons\ZD.JWT\ZD.JWT.csproj" />
   </ItemGroup>
 
   <ItemGroup>

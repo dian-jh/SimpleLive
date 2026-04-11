@@ -1,6 +1,7 @@
 using InteractionService.Domain.Services;
 using InteractionService.Infrastructure.Services;
 using InteractionService.WebAPI.Hubs;
+using ZD.JWT;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddCors(options =>
 });
 
 builder.AddServiceDefaults();
+
+builder.Services.AddZdJwt(builder.Configuration);
 
 // Add services to the container.
 
@@ -45,7 +48,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
-app.UseAuthorization();
+app.UseAuthentication();//验身份
+app.UseAuthorization();//验权限
 
 app.MapControllers();
 app.MapHub<LiveRoomHub>("/hubs/liveroom");
