@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using UserService.Domain;
 using UserService.Domain.Entities;
 
@@ -35,5 +36,19 @@ public class UserRepository : IUserRepository
         }
 
         return result;
+    }
+
+    public async Task<List<User>> GetUsersByIdsAsync(IEnumerable<Guid> ids)
+    {
+        if (ids == null || !ids.Any())
+        {
+            return new List<User>();
+        }
+        //去重
+        ids = ids.Distinct().ToList();
+
+        return await _userManager.Users
+                         .Where(u => ids.Contains(u.Id))
+                         .ToListAsync();
     }
 }

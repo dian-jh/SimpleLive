@@ -12,6 +12,7 @@
   "dependencies": {
     "@microsoft/signalr": "^10.0.0",
     "axios": "^1.14.0",
+    "date-fns": "^4.1.0",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.7.0",
     "mpegts.js": "^1.8.0",

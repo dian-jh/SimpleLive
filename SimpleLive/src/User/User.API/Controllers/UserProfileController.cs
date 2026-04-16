@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using UserService.API.Controllers.Request;
+using UserService.API.Services;
 using UserService.Domain;
 using ZD.Transaction;
 
@@ -14,11 +15,14 @@ public class UserProfileController : ControllerBase
 {
     private readonly UserDomainService _domainService;
     private readonly IUserRepository _repository;
+    private readonly UserProfileQueryService _queryService;
 
-    public UserProfileController(UserDomainService domainService, IUserRepository repository)
+    public UserProfileController(UserDomainService domainService, IUserRepository repository,
+        UserProfileQueryService queryService)
     {
         _domainService = domainService;
         _repository = repository;
+        _queryService = queryService;   
     }
 
     [HttpGet("me")]
@@ -30,36 +34,16 @@ public class UserProfileController : ControllerBase
 
         if (user == null) return NotFound();
 
-        // ！！！核心逻辑：年龄绝对不查数据库，而是根据生日实时推算！！！
-        int? calculatedAge = null;
-
-        if (user.DateOfBirth.HasValue)
-        {
-            var today = DateOnly.FromDateTime(DateTime.Now); // 获取今天的日期
-            var birthDate = user.DateOfBirth.Value;
-
-            int age = today.Year - birthDate.Year;
-
-            // 如果生日还没到，今年还没满，age 减 1
-            if (today < birthDate.AddYears(age))
-            {
-                age--;
-            }
-
-            calculatedAge = age;
-        }
-
         // 组装展示 DTO
         var response = new
         {
             AvatarUrl = user.AvatarUrl,
             NickName = user.NickName,
-            Age = calculatedAge,  // 动态计算的年龄
+            DateOfBirth = user.DateOfBirth,  // 动态计算的年龄
             Gender = user.Gender,
             Location = user.Location,
             Signature = user.Signature,
-            FollowingCount = user.FollowingCount,
-            FollowerCount = user.FollowerCount
+            FollowingCount = user.FollowingCount
         };
 
         return Ok(response);
@@ -83,5 +67,38 @@ public class UserProfileController : ControllerBase
         if (!success) return BadRequest(new { Message = errorMsg });
 
         return Ok();
+    }
+
+
+    [HttpGet("follows")]
+    public async Task<IActionResult> GetMyFollows([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 20)
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+        // 调用 API 层的 QueryService 拿数据，直接返回
+        var result = await _queryService.GetMyFollowingListAsync(userId, pageIndex, pageSize);
+        return Ok(result);
+    }
+
+    [HttpPost("history/{roomNumber}")]
+    [Transactional]
+    public async Task<IActionResult> RecordHistory([FromRoute] string roomNumber)
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+        // 调用 Domain 层执行动作
+        var (success, errorMsg) = await _domainService.RecordWatchHistoryAsync(userId, roomNumber);
+
+        if (!success) return BadRequest(new { Message = errorMsg });
+        return Ok();
+    }
+
+    [HttpGet("history")]
+    public async Task<IActionResult> GetHistory([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 20)
+    {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        // 调用 API 层的 QueryService 拿数据，直接返回
+        var result = await _queryService.GetMyWatchHistoryAsync(userId, pageIndex, pageSize);
+        return Ok(result);
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using System.Linq.Dynamic.Core;
 using UserService.Domain.Entities;
 using UserService.Domain.Enums;
 
@@ -7,10 +8,13 @@ namespace UserService.Domain;
 public class UserDomainService
 {
     private readonly IUserRepository _repository;
+    private readonly IWatchHistoryRepository _watchHistoryRepository;
 
-    public UserDomainService(IUserRepository repository)
+    public UserDomainService(IUserRepository repository,
+        IWatchHistoryRepository watchHistoryRepository)
     {
         _repository = repository;
+        _watchHistoryRepository = watchHistoryRepository;
     }
 
     // 注册业务逻辑
@@ -76,6 +80,39 @@ public class UserDomainService
         var result = await _repository.UpdateAsync(user);
         if (!result.Succeeded)
             return (false, "资料更新失败");
+
+        return (true, string.Empty);
+    }
+
+    /// <summary>
+    /// 记录观看历史 (Upsert 逻辑 + 500条限制)
+    /// </summary>
+    public async Task<(bool Success, string ErrorMessage)> RecordWatchHistoryAsync(
+        Guid userId,
+        string roomNumber,
+        CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrWhiteSpace(roomNumber)) return (false, "房间号无效");
+
+        // 1. 查找是否存在该房间的历史
+        var existing = await _watchHistoryRepository.FindAsync(userId, roomNumber, cancellationToken);
+
+        if (existing != null)
+        {
+            // 更新时间
+            existing.UpdateLastWatchTime();
+            _watchHistoryRepository.Update(existing);
+        }
+        else
+        {
+            // 新增记录
+            var history = new WatchHistory(userId, roomNumber);
+            _watchHistoryRepository.Add(history);
+        }
+
+        // 2. 超限清理 (保留最近500条)
+        // 这个方法在 Infrastructure 层实现具体的 SQL 删除逻辑
+        await _watchHistoryRepository.DeleteOldestBeyondLimitAsync(userId, 500, cancellationToken);
 
         return (true, string.Empty);
     }

@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using SimpleLive.ServiceDefaults;
 using UserService.API.Events;
+using UserService.API.Services;
 using UserService.API.Validators;
 using UserService.Domain;
 using UserService.Infrastructure;
@@ -37,6 +38,8 @@ builder.Services.AddValidatorsFromAssemblyContaining<RegisterRequestValidator>()
 builder.Services.AddUserInfrastructure(builder.Configuration);
 builder.Services.AddZdJwt(builder.Configuration);
 
+
+builder.AddRedisClient("redis");
 builder.Services.AddDbContext<UserDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("userdb"));
@@ -52,8 +55,13 @@ builder.Services.AddScoped<ITransactionManager>(sp => sp.GetRequiredService<User
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserDomainService>();
 
+
+builder.Services.AddScoped<ILiveStatusChecker, RedisLiveStatusChecker>();
 builder.Services.AddScoped<IIntegrationEventService, UserIntegrationEventService>();
 builder.Services.AddScoped<IIntegrationEventLogService, IntegrationEventLogService<UserDbContext>>();
+builder.Services.AddScoped<IUserFollowRepository, UserFollowRepository>();
+builder.Services.AddScoped<IWatchHistoryRepository, WatchHistoryRepository>();
+builder.Services.AddScoped<UserProfileQueryService>();
 
 builder.AddRabbitMqEventBus("eventbus");
 
@@ -61,7 +69,7 @@ builder.AddDefaultOpenApi();
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseCors("AllowFrontend");
 

@@ -10,17 +10,20 @@ public sealed class RoomDomainService
     private readonly IRoomNumberGenerator _roomNumberGenerator;
     private readonly IStreamKeyTokenService _streamKeyTokenService;
     private readonly IRoomOnlineCounter _roomOnlineCounter;
+    private readonly ILiveRosterTracker _liveRosterTracker;
 
     public RoomDomainService(
         IRoomRepository repository,
         IRoomNumberGenerator roomNumberGenerator,
         IStreamKeyTokenService streamKeyTokenService,
-        IRoomOnlineCounter roomOnlineCounter)
+        IRoomOnlineCounter roomOnlineCounter,
+        ILiveRosterTracker liveRosterTracker)
     {
         _repository = repository;
         _roomNumberGenerator = roomNumberGenerator;
         _streamKeyTokenService = streamKeyTokenService;
         _roomOnlineCounter = roomOnlineCounter;
+        _liveRosterTracker = liveRosterTracker;
     }
 
     // 方法 1：点击“下一步”时调用。只负责发牌（分配房间、生成推流码）
@@ -127,33 +130,36 @@ public sealed class RoomDomainService
     }
 
     public async Task<(bool Success, string ErrorMessage)> HandleOnPublishAsync(
-        string encryptedStreamToken,
-        DateTimeOffset nowUtc,
-        CancellationToken cancellationToken = default)
+          string encryptedStreamToken,
+          DateTimeOffset nowUtc,
+          CancellationToken cancellationToken = default)
     {
-        var (success, _, errorMessage) = await MarkRoomLiveByStreamTokenAsync(
+        var (success, room, errorMessage) = await MarkRoomLiveByStreamTokenAsync(
             encryptedStreamToken,
             nowUtc,
             cancellationToken);
 
-        if (!success)
-        {
-            return (false, errorMessage);
-        }
+        if (!success || room == null) return (false, errorMessage);
+
+        // 核心：调用接口。Domain 不知道这里是在操作 Redis
+        await _liveRosterTracker.AddToLiveListAsync(room.HostId, room.RoomNumber);
 
         await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         return (true, string.Empty);
     }
 
     public async Task<(bool Success, string ErrorMessage)> HandleOnUnpublishAsync(
-        string encryptedStreamToken,
-        CancellationToken cancellationToken = default)
+         string encryptedStreamToken,
+         CancellationToken cancellationToken = default)
     {
-        var (success, _, errorMessage) = await MarkRoomOfflineByStreamTokenAsync(encryptedStreamToken, cancellationToken);
-        if (!success)
-        {
-            return (false, errorMessage);
-        }
+        var (success, room, errorMessage) = await MarkRoomOfflineByStreamTokenAsync(
+            encryptedStreamToken,
+            cancellationToken);
+
+        if (!success || room == null) return (false, errorMessage);
+
+        // 核心：调用接口
+        await _liveRosterTracker.RemoveFromLiveListAsync(room.HostId);
 
         await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         return (true, string.Empty);

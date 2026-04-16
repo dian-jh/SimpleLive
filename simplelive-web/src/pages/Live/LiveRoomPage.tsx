@@ -18,7 +18,9 @@ const LiveRoomPage = () => {
 
   const isStartFlow = location.pathname === '/live/start'
   const viewerRoomNumber = isStartFlow ? undefined : roomNumber
-  const { roomDetail, onlineCount, isLoading, isConnecting, error } = useLiveRoom(viewerRoomNumber)
+
+  // 💡 教学点：这里解构出我们刚才在 Hook 中新增的 messages 和 sendMessage
+  const { roomDetail, onlineCount, messages, sendMessage, isLoading, isConnecting, error } = useLiveRoom(viewerRoomNumber)
 
   const startState = (location.state ?? null) as StartLiveRouteState | null
   const startTitle = startState?.title ?? '新主播第一次直播很紧张！！！'
@@ -95,8 +97,13 @@ const LiveRoomPage = () => {
               isLive
             />
           )}
-          {/* 这里如果觉得侧边栏也遮挡，可以在 ChatPanel 内部调整自身样式，但当前 grid 布局已通过 gap-6 隔开 */}
-          <ChatPanel onlineCount={onlineCount} />
+
+          {/* 💡 教学点：注入真实数据流和交互方法 */}
+          <ChatPanel
+            onlineCount={onlineCount}
+            messages={messages}
+            onSendMessage={sendMessage}
+          />
         </div>
       </main>
     </div>

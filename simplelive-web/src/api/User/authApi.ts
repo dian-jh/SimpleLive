@@ -38,11 +38,14 @@ export const registerApi = async (
 export const loginApi = async (
   payload: LoginRequestDto,
 ): Promise<LoginResponseDto> => {
+  console.log("before request")
   const response = await request.post<
     LoginResponseDto,
     AxiosResponse<LoginResponseDto>,
     LoginRequestDto
   >(`${AUTH_PREFIX}/login`, payload)
+
+  console.log("after request")
 
   return response.data
 }

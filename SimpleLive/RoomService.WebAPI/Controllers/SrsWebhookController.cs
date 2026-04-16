@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RoomService.Domain;
 using RoomService.WebAPI.Controllers.Requests;
+using ZD.Transaction;
 
 namespace RoomService.WebAPI.Controllers;
 
@@ -18,6 +19,7 @@ public sealed class SrsWebhookController : ControllerBase
 
     [HttpPost("on_publish")]
     [AllowAnonymous]
+    [Transactional]
     public async Task<IActionResult> OnPublish([FromBody] SrsWebhookRequest request, CancellationToken cancellationToken)
     {
         var (success, errorMessage) = await _domainService.HandleOnPublishAsync(
@@ -35,6 +37,7 @@ public sealed class SrsWebhookController : ControllerBase
 
     [HttpPost("on_unpublish")]
     [AllowAnonymous]
+    [Transactional]
     public async Task<IActionResult> OnUnpublish([FromBody] SrsWebhookRequest request, CancellationToken cancellationToken)
     {
         var (success, errorMessage) = await _domainService.HandleOnUnpublishAsync(request.Stream, cancellationToken);

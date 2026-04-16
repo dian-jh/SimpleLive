@@ -46,7 +46,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
 app.UseAuthentication();//验身份
 app.UseAuthorization();//验权限

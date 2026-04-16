@@ -34,6 +34,7 @@ export const useAuth = () => {
       alert('登录成功')
       return true
     } catch (error) {
+      console.error("Axios 捕获到的真实错误:", error);
       alert(parseErrorMessage(error))
       return false
     } finally {

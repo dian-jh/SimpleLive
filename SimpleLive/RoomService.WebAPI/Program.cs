@@ -3,8 +3,10 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using RoomService.Domain;
+using RoomService.Domain.Services;
 using RoomService.Infrastructure;
 using RoomService.Infrastructure.Extensions;
+using RoomService.Infrastructure.Services;
 using RoomService.WebAPI;
 using RoomService.WebAPI.Events.IntegrationEvents;
 using RoomService.WebAPI.Validators;
@@ -46,6 +48,7 @@ builder.Services.AddDbContext<RoomDbContext>(options =>
 
 builder.Services.AddScoped<RoomDomainService>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddSingleton<ILiveRosterTracker, RedisLiveRosterTracker>();
 
 builder.AddRabbitMqEventBus("eventbus")
     .AddSubscription<UserProfileUpdatedIntegrationEvent, UserProfileUpdatedIntegrationEventHandler>();

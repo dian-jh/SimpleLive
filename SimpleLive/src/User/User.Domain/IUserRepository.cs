@@ -10,4 +10,7 @@ public interface IUserRepository
     Task<IdentityResult> CreateAsync(User user, string password);
     Task<bool> CheckPasswordAsync(User user, string password);
     Task<IdentityResult> UpdateAsync(User user);
+
+    // 根据一批 ID 获取用户列表
+    Task<List<User>> GetUsersByIdsAsync(IEnumerable<Guid> ids);
 }

@@ -23,6 +23,7 @@
     <ProjectReference Include="..\RoomService.Infrastructure\RoomService.Infrastructure.csproj" />
     <ProjectReference Include="..\SimpleLive.ServiceDefaults\SimpleLive.ServiceDefaults.csproj" />
     <ProjectReference Include="..\src\Commons\ZD.JWT\ZD.JWT.csproj" />
+    <ProjectReference Include="..\ZD.Transaction\ZD.Transaction.csproj" />
   </ItemGroup>
 
 </Project>

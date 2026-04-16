@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using System.Reflection.Emit;
 using System.Transactions;
+using UserService.Domain.Entities;
 using ZD.DomainCommons;
 using ZD.IntegrationEventLogEF;
 using ZD.Transaction;
@@ -16,6 +17,10 @@ namespace UserService.Infrastructure;
 public sealed class UserDbContext(DbContextOptions<UserDbContext> options, IMediator mediator)
     : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>(options), IUnitOfWork, ITransactionManager
 {
+
+    public DbSet<UserFollow> UserFollows => Set<UserFollow>();
+    public DbSet<WatchHistory> WatchHistories => Set<WatchHistory>();
+
     //主构造函数的写法：c#12语法
     private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     private IDbContextTransaction _currentTransaction;

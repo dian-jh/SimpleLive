@@ -72,7 +72,7 @@ const AuthPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </AuthLayout>
+    </AuthLayout >
   )
 }
 

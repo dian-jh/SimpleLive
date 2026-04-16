@@ -82,6 +82,43 @@ public class LiveRoomHub : Hub
     }
 
     /// <summary>
+    /// 发送聊天消息
+    /// </summary>
+    /// <param name="roomNumber">目标房间号</param>
+    /// <param name="message">聊天内容</param>
+    public async Task SendMessage(string roomNumber, string message)
+    {
+        // 1. 基础校验
+        if (string.IsNullOrWhiteSpace(roomNumber) || string.IsNullOrWhiteSpace(message))
+        {
+            return;
+        }
+
+        // 2. 长度截断，防止恶意刷长文本导致内存溢出 (例如限制最大100个字符)
+        if (message.Length > 100)
+        {
+            message = message.Substring(0, 100);
+        }
+
+        string userId = GetUserId();
+        // 尝试获取用户昵称，如果 JWT 里没有 Name Claim，可以暂时用 UserId 代替，
+        // 或者后续在前端连 Hub 的时候把自己的昵称传过来，或者去 Redis/DB 里查
+        string userName = GetUserName() ?? $"用户_{userId.Substring(0, 5)}";
+
+        // 3. 构建消息负载
+        var chatPayload = new
+        {
+            UserId = userId,
+            UserName = userName,
+            Message = message,
+            SendTime = DateTimeOffset.UtcNow
+        };
+
+        // 4. 核心：向该房间的所有组员广播 "OnChatMessageReceived" 事件
+        await Clients.Group(roomNumber).SendAsync("OnChatMessageReceived", chatPayload);
+    }
+
+    /// <summary>
     /// 辅助方法：从 JWT 中提取 UserId
     /// </summary>
     private string GetUserId()
@@ -92,6 +129,15 @@ public class LiveRoomHub : Hub
             throw new HubException("无法获取用户身份，连接被拒绝");
         }
         return claimValue;
+    }
+
+    /// <summary>
+    /// 从 JWT 中提取 UserName (昵称)
+    /// 注意：确保你的 JWT 生成逻辑里包含了 ClaimTypes.Name
+    /// </summary>
+    private string? GetUserName()
+    {
+        return Context.User?.FindFirstValue(ClaimTypes.Name);
     }
 
 }

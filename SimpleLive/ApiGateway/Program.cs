@@ -10,13 +10,21 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod()
               .AllowCredentials());
 });
+//注册服务发现
+builder.Services.AddServiceDiscovery();
 
 // Add the reverse proxy capability to the server
 builder.Services.AddReverseProxy()
     // Initialize the reverse proxy from the "ReverseProxy" section of configuration
     //读取路由和目标服务配置
     .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
-    .AddServiceDiscoveryDestinationResolver();
+    .AddServiceDiscoveryDestinationResolver()
+    .ConfigureHttpClient((context, handler) =>
+    {
+        // 告诉 HttpClient：别去网上乱找代理了，不走代理
+        // 可以避免在烂网络环境下的 DNS/WPAD 挂起问题
+        handler.UseProxy = false;
+    });
 
 var app = builder.Build();
 

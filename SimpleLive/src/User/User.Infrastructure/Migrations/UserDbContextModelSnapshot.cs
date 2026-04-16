@@ -256,6 +256,47 @@ namespace UserService.Infrastructure.Migrations
                     b.ToTable("T_Users", (string)null);
                 });
 
+            modelBuilder.Entity("UserService.Domain.Entities.UserFollow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("FollowTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("TargetUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserFollows");
+                });
+
+            modelBuilder.Entity("UserService.Domain.Entities.WatchHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("LastWatchTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("RoomNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WatchHistories");
+                });
+
             modelBuilder.Entity("ZD.IntegrationEventLogEF.IntegrationEventLogEntry", b =>
                 {
                     b.Property<Guid>("EventId")

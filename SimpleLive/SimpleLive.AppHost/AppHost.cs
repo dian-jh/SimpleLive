@@ -9,6 +9,7 @@ var rabbitMq = builder.AddRabbitMQ("eventbus")
 
 var userApi = builder.AddProject<Projects.UserService_API>("userservice-api")
                      .WithReference(userDb)
+                     .WithReference(redis)
                      .WithReference(rabbitMq);
 
 var roomApi = builder.AddProject<Projects.RoomService_WebAPI>("roomservice-webapi")

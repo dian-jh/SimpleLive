@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import HomePage from '@/pages/Live/HomePage'
 import LiveRoomPage from '@/pages/Live/LiveRoomPage'
 import AuthPage from '@/pages/User/AuthPage'
+import ProfilePage from '@/pages/User/ProfilePage'
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
   {
     path: '/live/:roomNumber',
     element: <LiveRoomPage />,
+  },
+  {
+    path: '/profile',
+    element: <ProfilePage />,
   },
   {
     path: '*',
